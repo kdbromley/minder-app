@@ -1,5 +1,6 @@
 import { Component } from "react";
 import ReminderCard from '../ReminderCard/ReminderCard';
+import './ReminderPage.css'
 
 export default class ReminderPage extends Component {
     render() {

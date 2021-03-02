@@ -1,12 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import DisplayReminders from './DisplayReminders/DisplayReminders';
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import ReminderPage from './ReminderPage/ReminderPage';
 import AddReminder from './AddReminder/AddReminder';
+import LandingPage from './LandingPage/LandingPage';
 
 class App extends React.Component {
+  
+  renderRoutes() {
+    return (
+      <>
+      <Route
+       path='/'
+       component={Sidebar}
+      />
+      <Route
+       exact
+       path='/'
+       component={LandingPage}
+      />
+      <Route
+       path='/reminders'
+       component={DisplayReminders}
+      />
+      <Route
+       path='reminders/:reminderId'
+       component={ReminderPage}
+      />
+      <Route
+       path='/add-reminder'
+       component={AddReminder}
+      />
+      </>
+    )
+  }
+  
   render() {
     return (
       <div className="App">
@@ -16,10 +46,7 @@ class App extends React.Component {
           </h1>
         </header>
         <main className='App__main'>
-          <Sidebar />
-          <DisplayReminders />
-          <ReminderPage />
-          <AddReminder />
+          {this.renderRoutes()}
         </main>
         <footer>
           Footer
