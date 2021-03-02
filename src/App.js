@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import DisplayReminders from './DisplayReminders/DisplayReminders';
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
+import ReminderPage from './ReminderPage/ReminderPage';
 
 class App extends React.Component {
   render() {
@@ -16,7 +17,11 @@ class App extends React.Component {
         <main className='App__main'>
           <Sidebar />
           <DisplayReminders />
+          <ReminderPage />
         </main>
+        <footer>
+          Footer
+        </footer>
       </div>
     );
   }
