@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DisplayReminders from './DisplayReminders/DisplayReminders';
 import './App.css';
 
 class App extends React.Component {
@@ -12,7 +13,7 @@ class App extends React.Component {
           </h1>
         </header>
         <main className='App__main'>
-          <p>Hello, world.</p>
+          <DisplayReminders />
         </main>
       </div>
     );
