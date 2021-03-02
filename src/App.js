@@ -4,6 +4,7 @@ import DisplayReminders from './DisplayReminders/DisplayReminders';
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import ReminderPage from './ReminderPage/ReminderPage';
+import AddReminder from './AddReminder/AddReminder';
 
 class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Sidebar />
           <DisplayReminders />
           <ReminderPage />
+          <AddReminder />
         </main>
         <footer>
           Footer
