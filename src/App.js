@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import DisplayReminders from './DisplayReminders/DisplayReminders';
 import './App.css';
+import Sidebar from './Sidebar/Sidebar';
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
           </h1>
         </header>
         <main className='App__main'>
+          <Sidebar />
           <DisplayReminders />
         </main>
       </div>
