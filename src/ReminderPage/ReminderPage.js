@@ -1,17 +1,37 @@
 import { Component } from "react";
 import ReminderCard from '../ReminderCard/ReminderCard';
+import RemindersContext from "../RemindersContext";
 import './ReminderPage.css'
 
+function findReminder(reminders, reminderId) {
+    return reminders.find(reminder => reminder.id === reminderId)
+}
+
 export default class ReminderPage extends Component {
+    static contextType = RemindersContext;
+    static defaultProps = {
+        match: {
+          params: {}
+        }
+    }
+
     render() {
+        const { reminderId } = this.props.match.params;
+        const  { reminders= [] } = this.context;
+        const reminder = findReminder(reminders, reminderId)
+
+        if(!reminder) {
+        return (
+            <h2>404 reminder not found</h2>
+        )
+        } else {
         return(
-            <div>
-                <ReminderCard />
-                <h6>Notes:</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                <h6>Alert:</h6>
-                <p>email@host.com</p>
+            <div className='ReminderPage__container'>
+                <ReminderCard reminder={reminder}/>
+                <h6>Notes</h6>
+                <p>{reminder.content}</p>
             </div>
         )
     }
+}
 }
