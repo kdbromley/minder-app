@@ -8,7 +8,7 @@ export default class DisplayReminders extends Component {
     static contextType = RemindersContext;
 
     render() {
-      const { reminders } = this.context || {};
+      const { reminders=[] } = this.context;
         return (
             <div className='Display__container'>
                 <h2>Upcoming Reminders</h2>

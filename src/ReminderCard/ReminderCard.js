@@ -19,12 +19,11 @@ export default class ReminderCard extends Component {
 
     render() {
       const { reminder } = this.props || {};
-      const formattedDate = reminder.dueDate.toLocaleString();
         return (
             <>
               <div className='ReminderCard__container'>
                 <h4 className='ReminderCard__text'>{reminder.title}</h4>
-                <h5>Due Date: {formattedDate}</h5>
+                <h5>Due Date: {reminder.dueDate}</h5>
               </div>
               <div className='ReminderCard__buttons'>
                 <Button className='' label='Check' handleClick={this.handleCheck} />
