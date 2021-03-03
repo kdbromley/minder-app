@@ -42,7 +42,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App__header">
           <h1>
-            <Link to='/'>Minder</Link>
+            <Link to='/'>'minder</Link>
           </h1>
         </header>
         <main className='App__main'>

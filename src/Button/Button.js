@@ -1,8 +1,9 @@
+import './Button.css';
 
-export default function Button() {
+export default function(props) {
     return (
-        <button>
-            Button
-        </button>
-    )
+      <button className="button" onClick={props.handleClick}>
+        {props.label}
+      </button>
+    );
 }
