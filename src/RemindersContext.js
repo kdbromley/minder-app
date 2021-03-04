@@ -4,6 +4,7 @@ import React from 'react';
     events: [],
     currentDate: '',
     addReminder: () => {},
+    deleteReminder: () => {},
 })
 
 export default RemindersContext;

@@ -1,18 +1,24 @@
 import { Component } from 'react';
 import Button from '../Button/Button';
+import RemindersContext from '../RemindersContext';
 import './ReminderCard.css'
 
 export default class ReminderCard extends Component {
-    static defaultProps = {
+  static contextType = RemindersContext;  
+  static defaultProps = {
         reminder: {},
+        deleteReminder: () => {},
     }
     
     handleCheck = () => {
         console.log('check clicked')
     }
-    handleDelete = () => {
-        console.log('delete clicked')
-    }
+    handleDelete = e => {
+      e.preventDefault()
+      const reminderId = this.props.reminder.id
+      this.context.deleteReminder(reminderId)
+      this.props.deleteReminder(reminderId)
+  }
     handleEdit = () => {
         console.log('edit clicked')
     }

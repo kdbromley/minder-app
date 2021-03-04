@@ -6,6 +6,15 @@ import './DisplayReminders.css'
 
 export default class DisplayReminders extends Component {
     static contextType = RemindersContext;
+    static defaultProps = {
+        match: {
+          params: {}
+        }
+    }
+    
+    onDeleteReminder = () => {
+        this.props.history.push('/reminders')
+    }
 
     render() {
       const { reminders=[] } = this.context;
@@ -15,7 +24,8 @@ export default class DisplayReminders extends Component {
                 <div className='Display__reminders-list'>
                     {reminders.map(reminder =>
                       <Link to={`/reminders/${reminder.id}`} key={reminder.id}>
-                          <ReminderCard key={reminder.id} reminder={reminder} />
+                          <ReminderCard key={reminder.id} reminder={reminder} 
+                           deleteReminder={this.onDeleteReminder} />
                       </Link>
                     )}
                 </div>

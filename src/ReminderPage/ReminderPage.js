@@ -15,6 +15,10 @@ export default class ReminderPage extends Component {
         }
     }
 
+    onDeleteReminder = () => {
+        this.props.history.push('/reminders')
+    }
+
     render() {
         const { reminderId } = this.props.match.params;
         const  { reminders= [] } = this.context;
@@ -27,7 +31,7 @@ export default class ReminderPage extends Component {
         } else {
         return(
             <div className='ReminderPage__container'>
-                <ReminderCard reminder={reminder}/>
+                <ReminderCard reminder={reminder} deleteReminder={this.onDeleteReminder}/>
                 <h6>Notes</h6>
                 <p>{reminder.content}</p>
             </div>

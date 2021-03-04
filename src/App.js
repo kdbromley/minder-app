@@ -36,6 +36,12 @@ class App extends React.Component {
       reminders: [...this.state.reminders, reminder]
     })
   }
+
+  handleDeleteReminder = reminderId => {
+    this.setState({
+      reminders: this.state.reminders.filter(reminder => reminder.id !== reminderId)
+    })
+  }
   
   renderRoutes() {
     return (
@@ -62,10 +68,6 @@ class App extends React.Component {
        path='/add-reminder'
        component={AddReminder}
       />
-      <Route
-       path='/search'
-       component={SearchBar}
-      />
       </>
     )
   }
@@ -75,6 +77,7 @@ class App extends React.Component {
       reminders: this.state.reminders,
       currentDate: this.state.currentDate,
       addReminder: this.handleAddReminder,
+      deleteReminder: this.handleDeleteReminder,
     }
     return (
       <div className="App">
