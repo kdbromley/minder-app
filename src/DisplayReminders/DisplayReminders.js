@@ -14,7 +14,9 @@ export default class DisplayReminders extends Component {
                 <h2>Upcoming Reminders</h2>
                 <div className='Display__reminders-list'>
                     {reminders.map(reminder =>
-                      <Link to={`/reminders/${reminder.id}`} key={reminder.id}><ReminderCard key={reminder.id} reminder={reminder} /></Link>
+                      <Link to={`/reminders/${reminder.id}`} key={reminder.id}>
+                          <ReminderCard key={reminder.id} reminder={reminder} />
+                      </Link>
                     )}
                 </div>
             </div>

@@ -12,7 +12,7 @@ import './App.css';
 class App extends React.Component {
   state = {
     reminders: [],
-    currentDate: ''
+    currentDate: '',
   }
 
   loadReminders = reminders => {
@@ -30,6 +30,12 @@ class App extends React.Component {
     this.getTodayDate(today)
   }
 
+  handleAddReminder = (reminder) => {
+    console.log(reminder)
+    this.setState({
+      reminders: [...this.state.reminders, reminder]
+    })
+  }
   
   renderRoutes() {
     return (
@@ -56,6 +62,10 @@ class App extends React.Component {
        path='/add-reminder'
        component={AddReminder}
       />
+      <Route
+       path='/search'
+       component={SearchBar}
+      />
       </>
     )
   }
@@ -64,6 +74,7 @@ class App extends React.Component {
     const contextValue = {
       reminders: this.state.reminders,
       currentDate: this.state.currentDate,
+      addReminder: this.handleAddReminder,
     }
     return (
       <div className="App">

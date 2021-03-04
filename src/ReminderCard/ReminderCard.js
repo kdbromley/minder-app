@@ -4,7 +4,7 @@ import './ReminderCard.css'
 
 export default class ReminderCard extends Component {
     static defaultProps = {
-        reminder: {}
+        reminder: {},
     }
     
     handleCheck = () => {
