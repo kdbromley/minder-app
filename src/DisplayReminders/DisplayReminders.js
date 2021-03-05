@@ -7,11 +7,7 @@ import './DisplayReminders.css'
 
 export default class DisplayReminders extends Component {
     static contextType = RemindersContext;
-    static defaultProps = {
-        match: {
-          params: {}
-        }
-    }
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -29,6 +25,12 @@ export default class DisplayReminders extends Component {
         this.context.deleteReminder(reminderId)
         this.props.history.push('/reminders')
     }
+    onCheckReminder = reminder => {
+        const reminderId = reminder.id;
+        this.context.checkReminder(reminderId)
+        this.props.history.push('/reminders')
+    }
+
 
     render() {
       const { reminders=[] } = this.context;
@@ -47,7 +49,7 @@ export default class DisplayReminders extends Component {
                           <ReminderCard reminder={reminder} />
                       </Link>
                       <div className='Display__reminder__buttons'>
-                        <Button className='' label='Check' handleClick={this.handleCheck} reminder={reminder}/>
+                        <Button className='' label='Check' handleClick={() => this.onCheckReminder(reminder)} reminder={reminder}/>
                         <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} reminder={reminder}/>
                      </div>
                     </div>

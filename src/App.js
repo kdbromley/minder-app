@@ -47,6 +47,9 @@ class App extends React.Component {
     const indexNum = this.state.reminders.findIndex(matchId)
     this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
+  handleCheckReminder = reminderId => {
+    this.state.reminders.find(reminder => reminder.id === reminderId)["checked"] = "true"
+  }
   
   renderRoutes() {
     const todaysReminders = this.state.reminders.filter(reminder => reminder.dueDate === this.state.currentDate)
@@ -90,6 +93,7 @@ class App extends React.Component {
       addReminder: this.handleAddReminder,
       deleteReminder: this.handleDeleteReminder,
       editReminder: this.handleEditReminder,
+      checkReminder: this.handleCheckReminder,
     }
     return (
       <div className="App">

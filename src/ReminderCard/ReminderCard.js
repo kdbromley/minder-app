@@ -6,13 +6,8 @@ export default class ReminderCard extends Component {
   static contextType = RemindersContext;  
   static defaultProps = {
         reminder: {},
-        deleteReminder: () => {},
-        editReminder: () => {},
     }
-    
-    handleCheck = () => {
-        console.log('check clicked')
-    }
+  
 
     render() {
       const { reminder } = this.props || {};

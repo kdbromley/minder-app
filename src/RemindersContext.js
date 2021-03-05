@@ -6,6 +6,7 @@ import React from 'react';
     addReminder: () => {},
     deleteReminder: () => {},
     editReminder: () => {},
+    checkReminder: () => {},
 })
 
 export default RemindersContext;
