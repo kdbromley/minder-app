@@ -1,7 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function EditReminder(props) {    
     const { reminder } = props
+
+    let history = useHistory();
     
     const handleSubmit = e => {
         e.preventDefault();

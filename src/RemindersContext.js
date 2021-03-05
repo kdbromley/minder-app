@@ -1,7 +1,7 @@
 import React from 'react';
 
  const RemindersContext = React.createContext({
-    events: [],
+    reminders: [],
     currentDate: '',
     addReminder: () => {},
     deleteReminder: () => {},

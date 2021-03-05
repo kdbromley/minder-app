@@ -16,22 +16,21 @@ class App extends React.Component {
   }
 
   loadReminders = reminders => {
-      this.setState({ reminders: reminders })
+    this.setState({ reminders: reminders })
   }
   getTodayDate = today => {
-    this.setState({ today: today })
+    const formattedToday = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', year: 'numeric' }).format(today); 
+    this.setState({ currentDate: formattedToday })
   }
 
-
   componentDidMount() {
-    let today = new Date().toDateString()
+    let today = new Date()
     let reminders = STORE.reminders
     this.loadReminders(reminders)
     this.getTodayDate(today)
   }
 
   handleAddReminder = (reminder) => {
-    console.log(reminder)
     this.setState({
       reminders: [...this.state.reminders, reminder]
     })
@@ -45,11 +44,12 @@ class App extends React.Component {
 
   handleEditReminder = (reminderId, updatedReminder) => {
     const matchId = (reminder) => ( reminder.id === reminderId ) 
-    const index = this.state.reminders.findIndex(matchId)
-    this.state.reminders.splice(index, 1, updatedReminder)
+    const indexNum = this.state.reminders.findIndex(matchId)
+    this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
   
   renderRoutes() {
+    const todaysReminders = this.state.reminders.filter(reminder => reminder.dueDate === this.state.currentDate)
     return (
       <>
       <Route
@@ -59,7 +59,9 @@ class App extends React.Component {
       <Route
        exact
        path='/'
-       component={LandingPage}
+       render={(props) => 
+         <LandingPage {...props} reminders={todaysReminders} />
+       }
       />
       <Route
        exact
@@ -69,6 +71,9 @@ class App extends React.Component {
       <Route
        path='/reminders/:reminderId'
        component={ReminderPage}
+      />
+      <Route
+       path='/reminders/archive'
       />
       <Route
        path='/add-reminder'

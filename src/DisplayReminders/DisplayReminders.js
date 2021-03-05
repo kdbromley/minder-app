@@ -16,7 +16,12 @@ export default class DisplayReminders extends Component {
         super(props);
         this.state = {
             reminder: {},
+            toggleActive: true,
         }
+    }
+
+    toggleRemindersDisplay = (value) => {
+        this.setState({ toggleActive: value })
     }
 
     onDeleteReminder = reminder => {
@@ -27,11 +32,16 @@ export default class DisplayReminders extends Component {
 
     render() {
       const { reminders=[] } = this.context;
+      const activeReminders = reminders.filter(reminder => reminder.checked === "false")
+      const checkedReminders = reminders.filter(reminder => reminder.checked === "true")
+      const remindersToDisplay = this.state.toggleActive ? activeReminders : checkedReminders;
         return (
             <div className='Display__container'>
-                <h2>Upcoming Reminders</h2>
+                <h2>Reminders</h2>
+                <label htmlFor='incomplete'>Incomplete <input type='radio' id='incomplete' name='toggleDisplay' defaultChecked onClick={() => this.toggleRemindersDisplay(true)}/></label>
+                <label htmlFor='complete'>Complete <input type='radio' id='complete' name='toggleDisplay' onClick={() => this.toggleRemindersDisplay(false)}/></label>
                 <div className='Display__reminders-list'>
-                    {reminders.map(reminder =>
+                  {remindersToDisplay.map(reminder =>
                     <div className='Display__reminder' key={reminder.id}>
                       <Link to={`/reminders/${reminder.id}`} >
                           <ReminderCard reminder={reminder} />
@@ -40,7 +50,7 @@ export default class DisplayReminders extends Component {
                         <Button className='' label='Check' handleClick={this.handleCheck} reminder={reminder}/>
                         <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} reminder={reminder}/>
                      </div>
-                   </div>
+                    </div>
                     )}
                 </div>
             </div>

@@ -3,7 +3,7 @@ export const STORE = {
         {
             "id": "1",
             "title": 'Water Plants',
-            "dueDate": "03/03/2021",
+            "dueDate": "03/05/2021",
             "notes": "Fern gets 3 cups, spritz flowers",
             "checked": "false"
         },
@@ -24,14 +24,14 @@ export const STORE = {
         {
             "id": "4",
             "title": 'Reminder 1',
-            "dueDate": "03/09/2021",
+            "dueDate": "03/04/2021",
             "notes": "",
             "checked": "false"
         },
         {
             "id": "5",
             "title": 'Reminder 2',
-            "dueDate": "03/05/2021",
+            "dueDate": "03/04/2021",
             "notes": "lorem ipsum sic dolor",
             "checked": "false"
         },
@@ -59,9 +59,9 @@ export const STORE = {
         {
             "id": "9",
             "title": 'Reminder 6',
-            "dueDate": "03/03/2020",
+            "dueDate": "03/06/2020",
             "notes": "",
-            "checked": "false"
+            "checked": "true"
         },
     ]
 }

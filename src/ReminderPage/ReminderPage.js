@@ -14,7 +14,7 @@ export default class ReminderPage extends Component {
     static defaultProps = {
         match: {
           params: {}
-        }
+        },
     }
 
     constructor(props) {
@@ -37,8 +37,9 @@ export default class ReminderPage extends Component {
         this.setState({ displayEditReminder: false })
     }
     onEditSubmission = (reminderId, updatedReminder) => {
-        console.log(updatedReminder)
         this.context.editReminder(reminderId, updatedReminder)
+        this.setState({ displayEditReminder: false })
+        this.props.history.push('/reminders')
     }
 
     render() {
