@@ -100,7 +100,7 @@ export default class AddReminder extends Component {
                     <label htmlFor='notes'>Notes:</label>
                     <input id='notes' type='textarea' rows='4' cols='15' placeholder='Fern gets 2 cups, flowers 1 cup each, spritz water on flowers' /> 
                     <div className='AddReminder__button-container'>
-                      <button type='submit' className='AddReminder__button' on>Create</button>
+                      <button type='submit' className='AddReminder__button'>Create</button>
                       <button type='button' className='AddReminder__button'
                        onClick={this.handleClickCancel}>
                           Cancel

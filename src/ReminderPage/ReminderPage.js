@@ -1,6 +1,8 @@
 import { Component } from "react";
+import EditReminder from "../EditReminder/EditReminder";
 import ReminderCard from '../ReminderCard/ReminderCard';
 import RemindersContext from "../RemindersContext";
+import Button from '../Button/Button'
 import './ReminderPage.css'
 
 function findReminder(reminders, reminderId) {
@@ -15,8 +17,28 @@ export default class ReminderPage extends Component {
         }
     }
 
-    onDeleteReminder = () => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayEditReminder: false
+        }
+    }
+
+    onDeleteReminder = e => {
+        e.preventDefault()
+        const { reminderId } = this.props.match.params || {}
+        this.context.deleteReminder(reminderId)
         this.props.history.push('/reminders')
+    }
+    onEditReminder = () => {
+        this.setState({ displayEditReminder: true })
+    }
+    onCancelEdit = () => {
+        this.setState({ displayEditReminder: false })
+    }
+    onEditSubmission = (reminderId, updatedReminder) => {
+        console.log(updatedReminder)
+        this.context.editReminder(reminderId, updatedReminder)
     }
 
     render() {
@@ -30,10 +52,20 @@ export default class ReminderPage extends Component {
         )
         } else {
         return(
-            <div className='ReminderPage__container'>
-                <ReminderCard reminder={reminder} deleteReminder={this.onDeleteReminder}/>
+            <div className='ReminderPage__reminder-container'>
+                <ReminderCard reminder={reminder} />
+                <div className='Reminder__buttons'>
+                    <Button className='' label='Check' handleClick={this.Check} />
+                    <Button className='' label='Delete' handleClick={this.onDeleteReminder} />
+                    <Button className='' label='Edit' handleClick={this.onEditReminder} />
+                </div>
                 <h6>Notes</h6>
                 <p>{reminder.content}</p>
+                {this.state.displayEditReminder &&
+                   <EditReminder submitEdits={this.onEditSubmission} reminder={reminder}                  
+                   cancelEdit={this.onCancelEdit}
+                   />
+                }
             </div>
         )
     }

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RemindersContext from '../RemindersContext';
 import ReminderCard from "../ReminderCard/ReminderCard";
+import Button from '../Button/Button';
 import './DisplayReminders.css'
 
 export default class DisplayReminders extends Component {
@@ -11,8 +12,16 @@ export default class DisplayReminders extends Component {
           params: {}
         }
     }
-    
-    onDeleteReminder = () => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            reminder: {},
+        }
+    }
+
+    onDeleteReminder = reminder => {
+        const reminderId = reminder.id;
+        this.context.deleteReminder(reminderId)
         this.props.history.push('/reminders')
     }
 
@@ -23,10 +32,15 @@ export default class DisplayReminders extends Component {
                 <h2>Upcoming Reminders</h2>
                 <div className='Display__reminders-list'>
                     {reminders.map(reminder =>
-                      <Link to={`/reminders/${reminder.id}`} key={reminder.id}>
-                          <ReminderCard key={reminder.id} reminder={reminder} 
-                           deleteReminder={this.onDeleteReminder} />
+                    <div className='Display__reminder' key={reminder.id}>
+                      <Link to={`/reminders/${reminder.id}`} >
+                          <ReminderCard reminder={reminder} />
                       </Link>
+                      <div className='Display__reminder__buttons'>
+                        <Button className='' label='Check' handleClick={this.handleCheck} reminder={reminder}/>
+                        <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} reminder={reminder}/>
+                     </div>
+                   </div>
                     )}
                 </div>
             </div>
