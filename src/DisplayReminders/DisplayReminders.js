@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RemindersContext from '../RemindersContext';
 import ReminderCard from "../ReminderCard/ReminderCard";
 import Button from '../Button/Button';
-import './DisplayReminders.css'
+import './DisplayReminders.css';
 
 export default class DisplayReminders extends Component {
     static contextType = RemindersContext;
@@ -34,8 +34,10 @@ export default class DisplayReminders extends Component {
 
     render() {
       const { reminders=[] } = this.context;
-      const activeReminders = reminders.filter(reminder => reminder.checked === "false")
-      const checkedReminders = reminders.filter(reminder => reminder.checked === "true")
+      console.log(reminders)
+      let activeReminders = reminders.filter(reminder => reminder.checked === "false")
+      console.log(activeReminders)
+      let checkedReminders = reminders.filter(reminder => reminder.checked === "true")
       const remindersToDisplay = this.state.toggleActive ? activeReminders : checkedReminders;
         return (
             <div className='Display__container'>

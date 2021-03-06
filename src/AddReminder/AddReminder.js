@@ -23,14 +23,14 @@ export default class AddReminder extends Component {
     } 
     
     handleSubmit = e => {
-        e.preventDefault()
+        e.preventDefault();
         const { title, date, notes } = e.target
         const newReminder = {
           'id': uuid(),
           'title': title.value,
           'dueDate': date.value,
           'notes': notes.value,
-          'checked': false,
+          'checked': "false",
         } 
         if(!newReminder.title || !newReminder.dueDate) {
               this.setState({ error: 'Title and date are required'})
@@ -84,8 +84,7 @@ export default class AddReminder extends Component {
             <div className='AddReminder__container'>
                 {this.state.error && <ValidationError message={this.state.error} /> }
                 <form className='AddReminder__form'
-                 onSubmit={this.handleSubmit}
-                >
+                 onSubmit={this.handleSubmit}>
                     <label htmlFor='title'>Reminder: </label>
                     <input id='title' type='text' placeholder='Water Plants' 
                      onChange={e => this.updateTitle(e.target.value)} />
