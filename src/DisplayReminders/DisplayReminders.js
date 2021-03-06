@@ -34,9 +34,7 @@ export default class DisplayReminders extends Component {
 
     render() {
       const { reminders=[] } = this.context;
-      console.log(reminders)
       let activeReminders = reminders.filter(reminder => reminder.checked === "false")
-      console.log(activeReminders)
       let checkedReminders = reminders.filter(reminder => reminder.checked === "true")
       const remindersToDisplay = this.state.toggleActive ? activeReminders : checkedReminders;
         return (

@@ -31,9 +31,7 @@ class App extends React.Component {
   }
 
   handleAddReminder = reminder => {
-    console.log(reminder)
     this.setState({ reminders: [...this.state.reminders, reminder] })
-    console.log(this.state.reminders)
   }
 
   handleDeleteReminder = reminderId => {
@@ -87,7 +85,6 @@ class App extends React.Component {
   }
   
   render() {
-    console.log('app render', this.state.reminders)
     const contextValue = {
       reminders: this.state.reminders,
       currentDate: this.state.currentDate,
