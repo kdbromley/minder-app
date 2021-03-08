@@ -2,17 +2,9 @@ import { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 import RemindersContext from '../RemindersContext';
 import ValidationError from '../ValidationError';
-import { parse, formatISO } from 'date-fns';
+import { convertDateTime, hourArray } from '../helper-func';
 import './AddReminder.css';
 
-function convertDateTime(date, time, ampm) {
-    const dateTime = date + ' ' + time + ' ' + ampm;
-    var parsedDateTime = parse(dateTime, 'MM/dd/yyyy h:mm a', new Date())
-    console.log(parsedDateTime)
-    var formattedDateTime = formatISO(parsedDateTime)
-    return formattedDateTime
-
-}
 
 export default class AddReminder extends Component {
    static contextType = RemindersContext;
@@ -42,14 +34,15 @@ export default class AddReminder extends Component {
           'due_date': dueDate,
           'reminder_notes': notes.value,
           'completed': false,
-          'user_id': 1
+          'user_id': 1          //default user_id for dummyuser 
         } 
+        console.log(newReminder)
         if(!newReminder.title || !newReminder.due_date) {
               this.setState({ error: 'Title and date are required'})
             return false;
         }
          this.context.addReminder(newReminder)
-         this.props.history.push('/')
+         this.props.history.push('/reminders')
          
     }
 
@@ -92,7 +85,6 @@ export default class AddReminder extends Component {
     
 
     render() {
-        let hourArray = ['12:00', '12:30', '1:00', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30', '5:00', '5:30', '6:00', '6:30', '7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30']
         return (
             <div className='AddReminder__container'>
                 {this.state.error && <ValidationError message={this.state.error} /> }

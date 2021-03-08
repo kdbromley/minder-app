@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import { parse, formatISO } from 'date-fns';
-
-function convertDateTime(date, time, ampm) {
-    const dateTime = date + ' ' + time + ' ' + ampm;
-    var parsedDateTime = parse(dateTime, 'MM/dd/yyyy h:mm a', new Date())
-    var formattedDateTime = formatISO(parsedDateTime)
-    console.log(formattedDateTime)
-    return formattedDateTime
-}
-
+import { convertDateTime } from '../helper-func';
 
 export default function EditReminder(props) {   
     //const [error] = useState('')
@@ -24,7 +15,7 @@ export default function EditReminder(props) {
             'title': title.value,
             'due_date': dueDate,
             'reminder_notes': notes.value,
-            'completed': false,
+            'completed': false,             //no user_id field for editing, single dummyuser
         } 
         if(!updatedReminder.title || !updatedReminder.due_date) {
             //setState needs fixing
