@@ -2,7 +2,9 @@ import { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 import RemindersContext from '../RemindersContext';
 import ValidationError from '../ValidationError';
+import { convertDateTime, hourArray } from '../helper-func';
 import './AddReminder.css';
+
 
 export default class AddReminder extends Component {
    static contextType = RemindersContext;
@@ -24,20 +26,23 @@ export default class AddReminder extends Component {
     
     handleSubmit = e => {
         e.preventDefault();
-        const { title, date, notes } = e.target
+        const { title, date, hour, ampm,  notes } = e.target
+        const dueDate = convertDateTime(date.value, hour.value, ampm.value)
         const newReminder = {
           'id': uuid(),
           'title': title.value,
-          'dueDate': date.value,
-          'notes': notes.value,
-          'checked': "false",
+          'due_date': dueDate,
+          'reminder_notes': notes.value,
+          'completed': false,
+          'user_id': 1          //default user_id for dummyuser 
         } 
-        if(!newReminder.title || !newReminder.dueDate) {
+        console.log(newReminder)
+        if(!newReminder.title || !newReminder.due_date) {
               this.setState({ error: 'Title and date are required'})
             return false;
         }
          this.context.addReminder(newReminder)
-         this.props.history.push('/')
+         this.props.history.push('/reminders')
          
     }
 
@@ -86,14 +91,26 @@ export default class AddReminder extends Component {
                 <form className='AddReminder__form'
                  onSubmit={this.handleSubmit}>
                     <label htmlFor='title'>Reminder: </label>
-                    <input id='title' type='text' placeholder='Water Plants' 
+                    <input id='title' type='text' placeholder='Water Plants' required 
                      onChange={e => this.updateTitle(e.target.value)} />
                      <ValidationError message={this.validateTitle()} />
                     <fieldset>
                         <legend>Due:</legend>
                         <label htmlFor='date'>Date: </label>
-                        <input id='date' type='text' name='date' pattern='\d{1,2}/\d{1,2}/\d{4}' placeholder='mm/dd/yyyy' aria-label='month/day/full year' 
+                        <input id='date' type='text' name='date' 
+                        pattern='\d{1,2}/\d{1,2}/\d{4}' placeholder='mm/dd/yyyy' 
+                        aria-label='month/day/full year' required
                          onChange={e => this.updateDueDate(e.target.value)}/>
+                        <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
+                        <select name='hour' id='hour'>
+                            {hourArray.map(hour => {
+                                return <option name= 'hour' value={`${hour}`}>{hour}</option>}
+                            )}
+                        </select>
+                        <select name='ampm' id='ampm'>
+                            <option name='ampm' value='AM'>AM</option>
+                            <option name='ampm' value='PM'>PM</option>
+                        </select>
                          <ValidationError message={this.validateDueDate()} />
                     </fieldset>
                     <label htmlFor='notes'>Notes:</label>

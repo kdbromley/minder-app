@@ -39,7 +39,7 @@ export default class ReminderPage extends Component {
     onEditSubmission = (reminderId, updatedReminder) => {
         this.context.editReminder(reminderId, updatedReminder)
         this.setState({ displayEditReminder: false })
-        this.props.history.push('/reminders')
+        this.props.history.push(`/reminders/${reminderId}`)
     }
     onCheckReminder = () => {
         const { reminderId } = this.props.match.params || {}
