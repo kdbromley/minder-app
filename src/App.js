@@ -7,6 +7,7 @@ import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
 import { STORE } from './dummy-store';
 import RemindersContext from './RemindersContext';
+import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import './App.css';
 
 class App extends React.Component {
@@ -19,14 +20,26 @@ class App extends React.Component {
     this.setState({ reminders: reminders })
   }
   getTodayDate = today => {
-    const formattedToday = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', year: 'numeric' }).format(today); 
-    this.setState({ currentDate: formattedToday })
+    this.setState({ currentDate: today })
   }
 
   componentDidMount() {
-    let today = new Date()
-    let reminders = STORE.reminders
-    this.loadReminders(reminders)
+    fetch(API_BASE_URL + REMINDERS_ENDPOINT)
+    .then(res => {
+      if(!res.ok)
+        return res.json().then(e => Promise.reject(e));
+      
+      return res.json()
+    })
+    .then(reminders => {
+      console.log(reminders)
+      this.loadReminders(reminders)
+    })
+    .catch(err => {
+      console.log({err})
+    })
+
+    let today = new Date().toISOString();
     this.getTodayDate(today)
   }
 
