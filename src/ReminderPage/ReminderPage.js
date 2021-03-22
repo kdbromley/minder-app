@@ -39,8 +39,13 @@ export default class ReminderPage extends Component {
         this.setState({ displayEditReminder: false })
         this.props.history.push(`/reminders/${reminderId}`)
     }
-    onCheckReminder = () => {
+    onCheckReminder = (reminder) => {
         const { reminderId } = this.props.match.params || {}
+        if(reminder.completed === true) {
+            this.context.checkReminder(reminderId)
+        } else {
+            this.context.uncheckReminder(reminderId)
+        }
         this.context.checkReminder(reminderId)
         this.props.history.push('/reminders')
     }
@@ -60,7 +65,7 @@ export default class ReminderPage extends Component {
                 <ReminderCard reminder={reminder} />
                 <div className='Reminder__buttons'>
                     <Button className='' label='Check' handleClick={this.onCheckReminder} />
-                    <Button className='' label='Delete' handleClick={this.onDeleteReminder} />
+                    <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
                     <Button className='' label='Edit' handleClick={this.onEditReminder} />
                 </div>
                 <h6>Notes</h6>

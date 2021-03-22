@@ -26,6 +26,11 @@ export default class DisplayReminders extends Component {
         this.props.history.push('/reminders')
     }
     onCheckReminder = reminder => {
+        if(reminder.completed === true) {
+            this.context.checkReminder(reminderId)
+        } else {
+            this.context.uncheckReminder(reminderId)
+        }
         const reminderId = reminder.id;
         this.context.checkReminder(reminderId)
         this.props.history.push('/reminders')
@@ -34,13 +39,8 @@ export default class DisplayReminders extends Component {
 
     render() {
       const { reminders=[] } = this.context;
-<<<<<<< HEAD
       let activeReminders = reminders.filter(reminder => reminder.completed === false)
       let checkedReminders = reminders.filter(reminder => reminder.completed === true )
-=======
-      let activeReminders = reminders.filter(reminder => reminder.checked === "false")
-      let checkedReminders = reminders.filter(reminder => reminder.checked === "true")
->>>>>>> parent of d25f686... DisplayReminders successfully renders reminders from API server, add date formatting function to helper-func
       const remindersToDisplay = this.state.toggleActive ? activeReminders : checkedReminders;
         return (
             <div className='Display__container'>

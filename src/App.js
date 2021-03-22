@@ -56,10 +56,8 @@ class App extends React.Component {
     const indexNum = this.state.reminders.findIndex(matchId)
     this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
+  
   handleCheckReminder = reminderId => {
-    //reminderToBeChecked = this.state.reminders.find(reminder => reminder.id == reminderId)["completed"
-    //console.log
-     // this.setState(  )
     this.setState((prevState) => {
       return {
         reminders: prevState.reminders.map((reminder) => {
