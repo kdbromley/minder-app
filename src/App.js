@@ -5,7 +5,6 @@ import Sidebar from './Sidebar/Sidebar';
 import ReminderPage from './ReminderPage/ReminderPage';
 import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
-import { STORE } from './dummy-store';
 import RemindersContext from './RemindersContext';
 import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import './App.css';
@@ -32,7 +31,6 @@ class App extends React.Component {
       return res.json()
     })
     .then(reminders => {
-      console.log(reminders)
       this.loadReminders(reminders)
     })
     .catch(err => {
@@ -54,12 +52,39 @@ class App extends React.Component {
   }
 
   handleEditReminder = (reminderId, updatedReminder) => {
-    const matchId = (reminder) => ( reminder.id === reminderId ) 
+    const matchId = (reminder) => ( reminder.id == reminderId ) 
     const indexNum = this.state.reminders.findIndex(matchId)
     this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
   handleCheckReminder = reminderId => {
-    this.state.reminders.find(reminder => reminder.id === reminderId)["checked"] = "true"
+    //reminderToBeChecked = this.state.reminders.find(reminder => reminder.id == reminderId)["completed"
+    //console.log
+     // this.setState(  )
+    this.setState((prevState) => {
+      return {
+        reminders: prevState.reminders.map((reminder) => {
+          if (reminder.id === reminderId) {
+            return { ...reminder, completed: true };
+          } else {
+            return reminder;
+          }
+        }),
+      };
+    });
+  }
+
+  handleUncheckReminder = reminderId => {
+    this.setState((prevState) => {
+      return {
+        reminders: prevState.reminders.map((reminder) => {
+          if (reminder.id === reminderId) {
+            return { ...reminder, completed: false };
+          } else {
+            return reminder;
+          }
+        }),
+      };
+    });
   }
   
   renderRoutes() {

@@ -3,11 +3,9 @@ import EditReminder from "../EditReminder/EditReminder";
 import ReminderCard from '../ReminderCard/ReminderCard';
 import RemindersContext from "../RemindersContext";
 import Button from '../Button/Button'
+import { findReminder } from '../helper-func';
 import './ReminderPage.css'
 
-function findReminder(reminders, reminderId) {
-    return reminders.find(reminder => reminder.id === reminderId)
-}
 
 export default class ReminderPage extends Component {
     static contextType = RemindersContext;
@@ -49,7 +47,7 @@ export default class ReminderPage extends Component {
 
     render() {
         const { reminderId } = this.props.match.params;
-        const  { reminders= [] } = this.context;
+        const  { reminders=[] } = this.context;
         const reminder = findReminder(reminders, reminderId)
 
         if(!reminder) {

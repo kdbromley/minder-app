@@ -29,7 +29,6 @@ export default class AddReminder extends Component {
         const { title, date, hour, ampm,  notes } = e.target
         const dueDate = convertDateTime(date.value, hour.value, ampm.value)
         const newReminder = {
-          'id': uuid(),
           'title': title.value,
           'due_date': dueDate,
           'reminder_notes': notes.value,
