@@ -62,9 +62,9 @@ class App extends React.Component {
       return {
         reminders: prevState.reminders.map((reminder) => {
           if (reminder.id === reminderId) {
-            return { ...reminder, completed: true };
+            return { ...reminder, completed: true }
           } else {
-            return reminder;
+            return reminder
           }
         }),
       };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { convertDateTime } from '../helper-func';
+import { convertToISO } from '../helper-func';
 
 export default function EditReminder(props) {   
     //const [error] = useState('')
@@ -9,7 +9,7 @@ export default function EditReminder(props) {
     const handleSubmit = e => {
         e.preventDefault();
         const { title, date, hour, ampm, notes } = e.target;
-        const dueDate = convertDateTime(date.value, hour.value, ampm.value)
+        const dueDate = convertToISO(date.value, hour.value, ampm.value)
         const updatedReminder = {
             'id': reminder.id,
             'title': title.value,

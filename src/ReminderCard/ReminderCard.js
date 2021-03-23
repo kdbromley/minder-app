@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import { parseISO } from 'date-fns';
 import RemindersContext from '../RemindersContext';
-import './ReminderCard.css'
+import './ReminderCard.css';
+import { convertToReadable } from '../helper-func';
 
 export default class ReminderCard extends Component {
   static contextType = RemindersContext;  
@@ -11,13 +13,15 @@ export default class ReminderCard extends Component {
 
     render() {
       const { reminder } = this.props || {};
+      const readableDate = convertToReadable(reminder.due_date)
+      console.log(readableDate)
         return (
             <>
               <div className='ReminderCard__container'>
                 <h4 className='ReminderCard__text'>{reminder.title}</h4>
-                <h5>Due Date: {reminder.dueDate}</h5>
+                <h5>Due Date: {readableDate}</h5>
                 <div className='ReminderCard__check'>
-                  {(reminder.checked === "true") && 
+                  {(reminder.completed === "true") && 
                     <p>&#10003;</p>}
                 </div>
               </div>

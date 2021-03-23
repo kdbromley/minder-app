@@ -21,18 +21,16 @@ export default class DisplayReminders extends Component {
     }
 
     onDeleteReminder = reminder => {
-        const reminderId = reminder.id;
-        this.context.deleteReminder(reminderId)
+        this.context.deleteReminder(reminder.id)
         this.props.history.push('/reminders')
     }
     onCheckReminder = reminder => {
         if(reminder.completed === true) {
-            this.context.checkReminder(reminderId)
+            this.context.checkReminder(reminder.id)
         } else {
-            this.context.uncheckReminder(reminderId)
+            this.context.uncheckReminder(reminder.id)
         }
-        const reminderId = reminder.id;
-        this.context.checkReminder(reminderId)
+        //this.context.checkReminder(reminderId)
         this.props.history.push('/reminders')
     }
 
@@ -40,8 +38,8 @@ export default class DisplayReminders extends Component {
     render() {
       const { reminders=[] } = this.context;
       let activeReminders = reminders.filter(reminder => reminder.completed === false)
-      let checkedReminders = reminders.filter(reminder => reminder.completed === true )
-      const remindersToDisplay = this.state.toggleActive ? activeReminders : checkedReminders;
+      let completedReminders = reminders.filter(reminder => reminder.completed === true )
+      const remindersToDisplay = this.state.toggleActive ? activeReminders : completedReminders;
         return (
             <div className='Display__container'>
                 <h2>Reminders</h2>

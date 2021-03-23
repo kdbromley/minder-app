@@ -40,20 +40,22 @@ export default class ReminderPage extends Component {
         this.props.history.push(`/reminders/${reminderId}`)
     }
     onCheckReminder = (reminder) => {
-        const { reminderId } = this.props.match.params || {}
         if(reminder.completed === true) {
-            this.context.checkReminder(reminderId)
+            this.context.checkReminder(reminder.id)
         } else {
-            this.context.uncheckReminder(reminderId)
+            this.context.uncheckReminder(reminder.id)
         }
-        this.context.checkReminder(reminderId)
+        //this.context.checkReminder(reminder.id)
         this.props.history.push('/reminders')
     }
 
     render() {
         const { reminderId } = this.props.match.params;
+        console.log(reminderId)
         const  { reminders=[] } = this.context;
+        console.log(reminders)
         const reminder = findReminder(reminders, reminderId)
+        console.log(reminder)
 
         if(!reminder) {
         return (
