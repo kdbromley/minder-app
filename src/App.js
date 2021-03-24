@@ -61,7 +61,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       return {
         reminders: prevState.reminders.map((reminder) => {
-          if (reminder.id === reminderId) {
+          if (reminder.id == reminderId) {
             return { ...reminder, completed: true }
           } else {
             return reminder
@@ -69,15 +69,18 @@ class App extends React.Component {
         }),
       };
     });
+    
   }
 
   handleUncheckReminder = reminderId => {
     this.setState((prevState) => {
       return {
         reminders: prevState.reminders.map((reminder) => {
-          if (reminder.id === reminderId) {
+          if (reminder.id == reminderId) {
+            console.log('reminder')
             return { ...reminder, completed: false };
           } else {
+            console.log('else')
             return reminder;
           }
         }),
@@ -128,6 +131,7 @@ class App extends React.Component {
       deleteReminder: this.handleDeleteReminder,
       editReminder: this.handleEditReminder,
       checkReminder: this.handleCheckReminder,
+      uncheckReminder: this.handleUncheckReminder,
     }
     return (
       <div className="App">

@@ -66,7 +66,7 @@ export default class ReminderPage extends Component {
             <div className='ReminderPage__reminder-container'>
                 <ReminderCard reminder={reminder} />
                 <div className='Reminder__buttons'>
-                    <Button className='' label='Check' handleClick={this.onCheckReminder} />
+                    <Button className='' label='Check' handleClick={() => this.onCheckReminder(reminder)} />
                     <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
                     <Button className='' label='Edit' handleClick={this.onEditReminder} />
                 </div>
