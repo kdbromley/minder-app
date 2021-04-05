@@ -2,6 +2,7 @@ import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
 import ValidationError from '../ValidationError';
 import { convertToISO, hourArray } from '../helper-func';
+import config from '../config';
 import './AddReminder.css';
 
 
@@ -39,9 +40,26 @@ export default class AddReminder extends Component {
               this.setState({ error: 'Title and date are required'})
             return false;
         }
-         this.context.addReminder(newReminder)
-         this.props.history.push('/reminders')
-         
+        fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newReminder)
+          })
+          .then(response => {
+            if (!response.ok) {
+              return response.json().then(e => Promise.reject(e))
+            }
+          })
+          .then(() => {
+            this.context.addReminder(newReminder)
+            this.props.history.push('/reminders')
+          })
+          .catch(err => {
+            console.error(err)
+          })
     }
 
 
@@ -102,7 +120,7 @@ export default class AddReminder extends Component {
                         <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
                         <select name='hour' id='hour'>
                             {hourArray.map(hour => {
-                                return <option name= 'hour' value={`${hour}`}>{hour}</option>}
+                                return <option key={hour} name= 'hour' value={`${hour}`}>{hour}</option>}
                             )}
                         </select>
                         <select name='ampm' id='ampm'>

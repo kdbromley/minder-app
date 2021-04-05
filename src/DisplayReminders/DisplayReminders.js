@@ -8,6 +8,12 @@ import './DisplayReminders.css';
 
 export default class DisplayReminders extends Component {
   static contextType = RemindersContext;
+  static defaultProps = {
+    match: {
+      params: {}
+    },
+    reminders: [],
+}
   
   constructor(props) {
     super(props);
@@ -42,7 +48,6 @@ export default class DisplayReminders extends Component {
   }
   onCheckReminder = (reminder) => {
     const data = { completed: true }
-    console.log(JSON.stringify(data))
     
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
         method: 'PATCH',
