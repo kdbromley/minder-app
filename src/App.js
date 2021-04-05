@@ -49,6 +49,7 @@ class App extends React.Component {
     this.setState({
       reminders: this.state.reminders.filter(reminder => reminder.id !== reminderId)
     })
+    console.log('handle delete reminder')
   }
 
   handleEditReminder = (reminderId, updatedReminder) => {

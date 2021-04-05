@@ -12,19 +12,17 @@ export default class DisplayReminders extends Component {
     match: {
       params: {}
     },
-    reminders: [],
-}
+  }
   
   constructor(props) {
     super(props);
     this.state = {
-      reminder: {},
       toggleActive: true,
     }
   }
 
   toggleRemindersDisplay = (value) => {
-      this.setState({ toggleActive: value })
+    this.setState({ toggleActive: value })
   }
 
   onDeleteReminder = reminder => {
@@ -48,7 +46,8 @@ export default class DisplayReminders extends Component {
   }
   onCheckReminder = (reminder) => {
     const data = { completed: true }
-    
+    console.log(reminder.id)
+
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
         method: 'PATCH',
         mode: 'cors',
@@ -72,11 +71,11 @@ export default class DisplayReminders extends Component {
   }
 
   onUncheckReminder = (reminder) => {
-    const data = { completed: false }
+    const data = { "completed": false }
+    console.log(reminder.id)
 
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
       method: 'PATCH',
-      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
