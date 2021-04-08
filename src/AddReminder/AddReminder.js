@@ -56,7 +56,6 @@ export default class AddReminder extends Component {
      })
      .then(res => {
        newReminder.id = res.id;
-       console.log(newReminder)
        this.context.addReminder(newReminder)
        this.props.history.push('/reminders')
       })

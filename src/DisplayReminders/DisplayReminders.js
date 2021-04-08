@@ -27,7 +27,6 @@ export default class DisplayReminders extends Component {
 
   onDeleteReminder = reminder => {
     const reminderId = reminder.id
-    console.log(reminderId)
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminderId}`, {
         method: 'DELETE'
       })
@@ -46,33 +45,31 @@ export default class DisplayReminders extends Component {
   }
   onCheckReminder = (reminder) => {
     const data = { completed: true }
-    console.log(reminder.id)
 
-   /* fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(e => Promise.reject(e))
-        }
-      })
-      .then(() => {
-        this.context.checkReminder(reminder.id)
-        this.props.history.push('/reminders')
-      })
-      .catch(err => {
-        console.error(err)
-      }) */
+    fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+     })
+     .then(response => {
+       if (!response.ok) {
+        return response.json().then(e => Promise.reject(e))
+      }
+     })
+     .then(() => {
+       this.context.checkReminder(reminder.id)
+       this.props.history.push('/reminders')
+     })
+     .catch(err => {
+       console.error(err)
+     })
   }
 
   onUncheckReminder = (reminder) => {
-    const data = { completed: false }
-    console.log(reminder.id)
+    const data = { completed: "false" }
 
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
       method: 'PATCH',

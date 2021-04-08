@@ -27,7 +27,7 @@ class App extends React.Component {
     .then(res => {
       if(!res.ok)
         return res.json().then(e => Promise.reject(e));
-      
+  
       return res.json()
     })
     .then(reminders => {
@@ -49,7 +49,6 @@ class App extends React.Component {
     this.setState({
       reminders: this.state.reminders.filter(reminder => reminder.id !== reminderId)
     })
-    console.log('handle delete reminder')
   }
 
   handleEditReminder = (reminderId, updatedReminder) => {
@@ -77,10 +76,8 @@ class App extends React.Component {
       return {
         reminders: prevState.reminders.map((reminder) => {
           if (reminder.id == reminderId) {
-            console.log('reminder')
             return { ...reminder, completed: false };
           } else {
-            console.log('else')
             return reminder;
           }
         }),

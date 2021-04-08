@@ -78,7 +78,7 @@ export default class ReminderPage extends Component {
         })
   }
   onUncheckReminder = (reminder) => {
-      const data = { completed: false }
+      const data = { completed: "false" }
 
       fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
           method: 'PATCH',

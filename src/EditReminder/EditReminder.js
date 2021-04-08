@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { convertToISO, hourArray, convertToReadable } from '../helper-func';
-import { parse } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 import config from '../config';
 
 export default function EditReminder(props) {   
@@ -20,10 +20,10 @@ export default function EditReminder(props) {
             'completed': false,             //no user_id field for editing, single dummyuser
         } 
         if(!updatedReminder.title || !updatedReminder.due_date) {
-            //setState needs fixing
+            //setState needs fixing for error message
           return false;
-      }
-      console.log(updatedReminder)
+        } 
+
       fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
         method: 'PATCH',
         headers: {
@@ -48,9 +48,8 @@ export default function EditReminder(props) {
         props.cancelEdit()
     }
 
-    const readableDateTime = convertToReadable(reminder.due_date)
-    const readableDate = readableDateTime.slice(0, 15)
-    const formattedReadableDate = parse(readableDate, 'E..EEE MMM dd yyyy', new Date())
+    const parsedDate = parseISO(reminder.due_date)
+    const formattedDate = format(parsedDate, 'MM/dd/yyyy')
 
     return (
         <form className='EditReminder__form'
@@ -61,13 +60,13 @@ export default function EditReminder(props) {
                 <legend>Due:</legend>
                 <label htmlFor='date'>Date: </label>
                 <input id='date' type='text' name='date' pattern='\d{1,2}/\d{1,2}/\d{4}' 
-                    defaultValue={readableDate} placeholder={readableDate}
+                    defaultValue={formattedDate} placeholder={formattedDate}
                     aria-label='month/day/full year'
                 />
                 <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
                     <select name='hour' id='hour'>
                     {hourArray.map(hour => {
-                        return <option name= 'hour' value={`${hour}`}>{hour}</option>}
+                        return <option key={hour} name= 'hour' value={`${hour}`}>{hour}</option>}
                     )}
                     </select>
                     <select name='ampm' id='ampm'>
@@ -77,7 +76,7 @@ export default function EditReminder(props) {
             </fieldset>
             <label htmlFor='notes'>Notes:</label>
             <input id='notes' type='textarea' rows='4' cols='15' 
-             defaultValue={reminder.notes} placeholder={reminder.notes} 
+             defaultValue={reminder.reminder_notes} placeholder={reminder.reminder_notes} 
             /> 
             <div className='AddReminder__button-container'>
                 <button type='submit' className='AddReminder__button'>
