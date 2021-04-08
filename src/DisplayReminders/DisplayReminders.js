@@ -48,7 +48,7 @@ export default class DisplayReminders extends Component {
     const data = { completed: true }
     console.log(reminder.id)
 
-    fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
+   /* fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
         method: 'PATCH',
         mode: 'cors',
         headers: {
@@ -67,11 +67,11 @@ export default class DisplayReminders extends Component {
       })
       .catch(err => {
         console.error(err)
-      })
+      }) */
   }
 
   onUncheckReminder = (reminder) => {
-    const data = { "completed": false }
+    const data = { completed: false }
     console.log(reminder.id)
 
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
