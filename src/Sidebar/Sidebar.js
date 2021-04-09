@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
+//import SearchBar from '../SearchBar/SearchBar';   //future feature
 import './Sidebar.css';
 
 export default class Sidebar extends Component {
