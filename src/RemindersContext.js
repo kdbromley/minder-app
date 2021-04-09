@@ -7,6 +7,7 @@ import React from 'react';
     deleteReminder: () => {},
     editReminder: () => {},
     checkReminder: () => {},
+    uncheckReminder: () => {},
 })
 
 export default RemindersContext;

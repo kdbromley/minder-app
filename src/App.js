@@ -5,9 +5,10 @@ import Sidebar from './Sidebar/Sidebar';
 import ReminderPage from './ReminderPage/ReminderPage';
 import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
-import { STORE } from './dummy-store';
 import RemindersContext from './RemindersContext';
+import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import './App.css';
+import ErrorBoundary from './ErrorBoundary';
 
 class App extends React.Component {
   state = {
@@ -19,14 +20,25 @@ class App extends React.Component {
     this.setState({ reminders: reminders })
   }
   getTodayDate = today => {
-    const formattedToday = new Intl.DateTimeFormat('en-US', {month: '2-digit', day: '2-digit', year: 'numeric' }).format(today); 
-    this.setState({ currentDate: formattedToday })
+    this.setState({ currentDate: today })
   }
 
   componentDidMount() {
-    let today = new Date()
-    let reminders = STORE.reminders
-    this.loadReminders(reminders)
+    fetch(API_BASE_URL + REMINDERS_ENDPOINT)
+    .then(res => {
+      if(!res.ok)
+        return res.json().then(e => Promise.reject(e));
+  
+      return res.json()
+    })
+    .then(reminders => {
+      this.loadReminders(reminders)
+    })
+    .catch(err => {
+      console.log({err})
+    })
+
+    let today = new Date().toISOString();
     this.getTodayDate(today)
   }
 
@@ -41,12 +53,37 @@ class App extends React.Component {
   }
 
   handleEditReminder = (reminderId, updatedReminder) => {
-    const matchId = (reminder) => ( reminder.id === reminderId ) 
+    const matchId = (reminder) => ( reminder.id == reminderId ) 
     const indexNum = this.state.reminders.findIndex(matchId)
     this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
+  
   handleCheckReminder = reminderId => {
-    this.state.reminders.find(reminder => reminder.id === reminderId)["checked"] = "true"
+    this.setState((prevState) => {
+      return {
+        reminders: prevState.reminders.map((reminder) => {
+          if (reminder.id == reminderId) {
+            return { ...reminder, completed: true }
+          } else {
+            return reminder
+          }
+        }),
+      };
+    });
+  }
+
+  handleUncheckReminder = reminderId => {
+    this.setState((prevState) => {
+      return {
+        reminders: prevState.reminders.map((reminder) => {
+          if (reminder.id == reminderId) {
+            return { ...reminder, completed: false };
+          } else {
+            return reminder;
+          }
+        }),
+      };
+    });
   }
   
   renderRoutes() {
@@ -92,6 +129,7 @@ class App extends React.Component {
       deleteReminder: this.handleDeleteReminder,
       editReminder: this.handleEditReminder,
       checkReminder: this.handleCheckReminder,
+      uncheckReminder: this.handleUncheckReminder,
     }
     return (
       <div className="App">
@@ -102,7 +140,9 @@ class App extends React.Component {
             </h1>
           </header>
           <main className='App__main'>
+            <ErrorBoundary>
             {this.renderRoutes()}
+            </ErrorBoundary>
           </main>
        </RemindersContext.Provider>
         <footer>
