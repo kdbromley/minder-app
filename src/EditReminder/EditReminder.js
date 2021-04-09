@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
-import { convertToISO, hourArray, convertToReadable } from '../helper-func';
-import { format, parse, parseISO } from 'date-fns';
+import PropTypes from 'prop-types';
+import { convertToISO, hourArray } from '../helper-func';
+import { lightFormat, format, parseISO } from 'date-fns';
 import config from '../config';
 
 export default function EditReminder(props) {   
     //const [error] = useState('')
     
-    const { reminder } = props
+    const { reminder } = props;
+    console.log(reminder.due_date)
     
     const handleSubmit = e => {
-        e.preventDefault();
-        const { title, date, hour, ampm, notes } = e.target;
-        const dueDate = convertToISO(date.value, hour.value, ampm.value)
-        const updatedReminder = {
-            'id': reminder.id,
-            'title': title.value,
-            'due_date': dueDate,
-            'reminder_notes': notes.value,
-            'completed': false,             //no user_id field for editing, single dummyuser
-        } 
-        if(!updatedReminder.title || !updatedReminder.due_date) {
-            //setState needs fixing for error message
-          return false;
-        } 
+      e.preventDefault();
+      const { title, date, hour, ampm, notes } = e.target;
+      const dueDate = convertToISO(date.value, hour.value, ampm.value)
+      const updatedReminder = {
+        'id': reminder.id,
+        'title': title.value,
+        'due_date': dueDate,
+        'reminder_notes': notes.value,
+        'completed': false,             
+        //no user_id field for editing, single dummyuser
+      } 
+      if(!updatedReminder.title || !updatedReminder.due_date) {
+          //setState needs fixing for error message
+        return false;
+      } 
 
       fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
         method: 'PATCH',
@@ -47,9 +50,8 @@ export default function EditReminder(props) {
     const handleClickCancel = () => {
         props.cancelEdit()
     }
-
-    const parsedDate = parseISO(reminder.due_date)
-    const formattedDate = format(parsedDate, 'MM/dd/yyyy')
+    
+    const formattedDate = format(parseISO(reminder.due_date), 'MM/dd/yyyy')
 
     return (
         <form className='EditReminder__form'
@@ -92,6 +94,19 @@ export default function EditReminder(props) {
 }
 
 EditReminder.defaultProps = {
-    editReminder: () => {},
+    submitEdits: () => {},
+    cancelEdit: () => {},
     reminder: {},
+}
+
+EditReminder.propTypes = {
+  reminder: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    due_date: PropTypes.string.isRequired,
+    reminder_notes: PropTypes.string,
+    completed: PropTypes.bool.isRequired,
+    user_id: PropTypes.number.isRequired,
+  }).isRequired,
+  submitEdits: PropTypes.func
 }
