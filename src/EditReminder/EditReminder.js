@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+//import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { convertToISO, hourArray } from '../helper-func';
-import { lightFormat, format, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import config from '../config';
 
 export default function EditReminder(props) {   
-    //const [error] = useState('')
+    //const [error] = useState('')     //form input errors for user information, will add feature in styling
     
     const { reminder } = props;
-    console.log(reminder.due_date)
     
     const handleSubmit = e => {
       e.preventDefault();
@@ -23,7 +23,7 @@ export default function EditReminder(props) {
         //no user_id field for editing, single dummyuser
       } 
       if(!updatedReminder.title || !updatedReminder.due_date) {
-          //setState needs fixing for error message
+          //setState needs implementation for error message
         return false;
       } 
 

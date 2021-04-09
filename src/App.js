@@ -53,7 +53,7 @@ class App extends React.Component {
   }
 
   handleEditReminder = (reminderId, updatedReminder) => {
-    const matchId = (reminder) => ( reminder.id == reminderId ) 
+    const matchId = (reminder) => ( reminder.id === reminderId ) 
     const indexNum = this.state.reminders.findIndex(matchId)
     this.state.reminders.splice(indexNum, 1, updatedReminder)
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       return {
         reminders: prevState.reminders.map((reminder) => {
-          if (reminder.id == reminderId) {
+          if (reminder.id === reminderId) {
             return { ...reminder, completed: true }
           } else {
             return reminder
@@ -76,7 +76,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       return {
         reminders: prevState.reminders.map((reminder) => {
-          if (reminder.id == reminderId) {
+          if (reminder.id === reminderId) {
             return { ...reminder, completed: false };
           } else {
             return reminder;
