@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
-import './ReminderCard.css';
+import PropTypes from 'prop-types';
 import { convertToReadable } from '../helper-func';
+import './ReminderCard.css';
 
 export default class ReminderCard extends Component {
   static contextType = RemindersContext;  
@@ -26,4 +27,15 @@ export default class ReminderCard extends Component {
             </>
         )
     }
+}
+
+ReminderCard.propsType = {
+  reminder: PropTypes.objectOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    due_date: PropTypes.string.isRequired,
+    reminder_notes: PropTypes.string,
+    completed: PropTypes.bool.isRequired,
+    user_id: PropTypes.number.isRequired
+  })).isRequired,
 }

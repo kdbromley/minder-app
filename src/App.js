@@ -8,6 +8,7 @@ import LandingPage from './LandingPage/LandingPage';
 import RemindersContext from './RemindersContext';
 import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import './App.css';
+import ErrorBoundary from './ErrorBoundary';
 
 class App extends React.Component {
   state = {
@@ -139,7 +140,9 @@ class App extends React.Component {
             </h1>
           </header>
           <main className='App__main'>
+            <ErrorBoundary>
             {this.renderRoutes()}
+            </ErrorBoundary>
           </main>
        </RemindersContext.Provider>
         <footer>
