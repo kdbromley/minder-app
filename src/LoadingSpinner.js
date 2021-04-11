@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { usePromiseTracker } from 'react-promise-tracker';
+import Loader from 'react-loader-spinner';
 
 export default function LoadingSpinner(props) {
     const { promiseInProgress } = usePromiseTracker();
@@ -7,7 +8,7 @@ export default function LoadingSpinner(props) {
         <>
         {
             (promiseInProgress === true) 
-            ? <h3>Fetch in progress</h3>
+            ? <Loader type='Bars' color='#810012'/>
             : null
         }
         </>
