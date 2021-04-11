@@ -145,9 +145,9 @@ class App extends React.Component {
           </header>
           <main className='App__main'>
             <ErrorBoundary>
-            {this.renderRoutes()}
-            <LoadingSpinner />
+            {this.renderRoutes()}  
             </ErrorBoundary>
+          <LoadingSpinner />
           </main>
        </RemindersContext.Provider>
         <footer>
