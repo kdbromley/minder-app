@@ -7,8 +7,10 @@ import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
 import RemindersContext from './RemindersContext';
 import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
-import './App.css';
 import ErrorBoundary from './ErrorBoundary';
+import { trackPromise } from 'react-promise-tracker';
+import LoadingSpinner from './LoadingSpinner';
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -24,19 +26,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch(API_BASE_URL + REMINDERS_ENDPOINT)
-    .then(res => {
-      if(!res.ok)
-        return res.json().then(e => Promise.reject(e));
-  
-      return res.json()
-    })
-    .then(reminders => {
-      this.loadReminders(reminders)
-    })
-    .catch(err => {
-      console.log({err})
-    })
+    trackPromise(
+      fetch(API_BASE_URL + REMINDERS_ENDPOINT)
+      .then(res => {
+        if(!res.ok)
+          return res.json().then(e => Promise.reject(e));
+    
+        return res.json()
+      })
+      .then(reminders => {
+        this.loadReminders(reminders)
+      })
+      .catch(err => {
+        console.log({err})
+      })
+    );
 
     let today = new Date().toISOString();
     this.getTodayDate(today)
@@ -142,6 +146,7 @@ class App extends React.Component {
           <main className='App__main'>
             <ErrorBoundary>
             {this.renderRoutes()}
+            <LoadingSpinner />
             </ErrorBoundary>
           </main>
        </RemindersContext.Provider>
