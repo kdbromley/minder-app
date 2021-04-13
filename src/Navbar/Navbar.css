@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+.Navbar__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 4%;
+    margin-left: 4%;
+    margin-top: 15px;
+    min-height: 50px;
+}
+.Navbar__container :nth-child(1) { order: 2; }
+.Navbar__container :nth-child(2) { order: 1; }
+.Navbar__container :nth-child(3) { order: 3; }
+
+.Navbar__app-title {
+    font-family: 'Caveat', cursive;
+    font-size: calc(35px + 20 * ((100vw - 320px) / 680));
+    margin: 0;
+}
+
+a.Navbar__link {
+    font-size: calc(22px + 12 * ((100vw - 320px) / 680));
+}
+a.Navbar__link:hover, a.Navbar__link:active {
+    font-style: italic;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: #f5ce4e;
+}
