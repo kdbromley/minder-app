@@ -7,8 +7,9 @@
     justify-content: space-evenly;
     margin-right: 4%;
     margin-left: 4%;
-    margin-top: 15px;
-    min-height: 50px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    min-height: 60px;
 }
 .Navbar__container :nth-child(1) { order: 2; }
 .Navbar__container :nth-child(2) { order: 1; }
@@ -16,17 +17,17 @@
 
 .Navbar__app-title {
     font-family: 'Caveat', cursive;
-    font-size: calc(35px + 20 * ((100vw - 320px) / 680));
+    font-size: calc(38px + 20 * ((100vw - 320px) / 680));
     margin: 0;
+}
+.Navbar__app-title > a {
+    color: #f5ce4e;
 }
 
 a.Navbar__link {
     font-size: calc(22px + 12 * ((100vw - 320px) / 680));
+    color: #f5ce4e;
 }
 a.Navbar__link:hover, a.Navbar__link:active {
     font-style: italic;
-}
-
-a:link, a:visited, a:hover, a:active {
-    color: #f5ce4e;
 }
