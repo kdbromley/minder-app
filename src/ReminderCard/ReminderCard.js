@@ -17,8 +17,8 @@ export default class ReminderCard extends Component {
         return (
             <>
               <div className='ReminderCard__container'>
-                <h4 className='ReminderCard__text'>{reminder.title}</h4>
-                <h5>Due Date: {readableDate}</h5>
+                <h3 className='ReminderCard__title'>{reminder.title}</h3>
+                <h4><span>Due:</span> {readableDate}</h4>
                 <div className='ReminderCard__check'>
                   {(reminder.completed === "true") && 
                     <p>&#10003;</p>}
