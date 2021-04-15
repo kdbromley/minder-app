@@ -21,13 +21,16 @@
     margin: 0;
 }
 .Navbar__app-title > a {
+    text-decoration: none;
     color: #f5ce4e;
 }
 
 a.Navbar__link {
+    text-decoration: none;
     font-size: calc(22px + 12 * ((100vw - 320px) / 680));
     color: #f5ce4e;
 }
 a.Navbar__link:hover, a.Navbar__link:active {
+    text-decoration: none;
     font-style: italic;
 }
