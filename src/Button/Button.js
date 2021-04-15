@@ -1,5 +1,6 @@
 import deleteIcon from '../images/trash-2.svg'
-import checkIcon from '../images/check-circle.svg';
+import checkCircleIcon from '../images/check-circle.svg';
+import checkIcon from '../images/check.svg';
 import './Button.css';
 
 export default function Button(props) {
@@ -7,7 +8,7 @@ export default function Button(props) {
   let renderIcon = () => { 
    switch(props.label) {
       case 'Delete': return <img src={deleteIcon} alt='Delete Icon' />;
-      case 'Check': return <img src={checkIcon} alt='Check Icon' />;
+      case 'Check': return <img src={checkCircleIcon} alt='Check Icon' />;
       case 'Uncheck': return <img src={checkIcon} alt='Uncheck Icon' />;
     }
   }
