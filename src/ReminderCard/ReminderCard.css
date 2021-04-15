@@ -19,13 +19,6 @@
     font-size: calc(16px + 25 * ((100vw - 320px) / 680));
 }
 
-.ReminderPage__container > h3 {
-    font-size: calc(24px + 35 * ((100vw - 320px) / 680));
-}
-.ReminderPage__container > .ReminderCard__due-date {
-    font-size: calc(20px + 35 * ((100vw - 320px) / 680));
-}
-
 span {
     color: #275982;
 }
