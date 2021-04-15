@@ -1,32 +1,28 @@
 import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
 import PropTypes from 'prop-types';
-import { convertToReadable } from '../helper-func';
+import { formattedDateTime } from '../helper-func';
 import './ReminderCard.css';
 
 export default class ReminderCard extends Component {
   static contextType = RemindersContext;  
   static defaultProps = {
-        reminder: {},
-    }
+    reminder: {},
+  }
   
 
-    render() {
-      const { reminder } = this.props || {};
-      const readableDate = convertToReadable(reminder.due_date)
-        return (
-            <>
-              <div className='ReminderCard__container'>
-                <h3 className='ReminderCard__title'>{reminder.title}</h3>
-                <h4><span>Due:</span> {readableDate}</h4>
-                <div className='ReminderCard__check'>
-                  {(reminder.completed === "true") && 
-                    <p>&#10003;</p>}
-                </div>
-              </div>
-            </>
-        )
-    }
+  render() {
+    const { reminder } = this.props || {};
+    const due = formattedDateTime(reminder.due_date)
+    return (
+      <>
+        <div className='ReminderCard__container'>
+          <h3 className='ReminderCard__title'>{reminder.title}</h3>
+          <h4 className='ReminderCard__due-date'><span>Due:</span> {due}</h4>
+        </div>
+      </>
+    )
+  }
 }
 
 ReminderCard.propsType = {
