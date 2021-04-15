@@ -7,12 +7,18 @@
 .ReminderCard__container {
     text-decoration: none;
     height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.ReminderCard__title {
+.ReminderCard__title, .ReminderCard__due-date {
     color: #16262e;
+    margin: 5px;
+    font-size: calc(16px + 25 * ((100vw - 320px) / 680));
 }
 
 span {
-    color: #16262e
+    color: #275982;
 }

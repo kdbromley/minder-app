@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
 import PropTypes from 'prop-types';
-import { formattedDateTime } from '../helper-func';
+import { formattedDate, formattedTime } from '../helper-func';
 import './ReminderCard.css';
 
 export default class ReminderCard extends Component {
@@ -13,12 +13,17 @@ export default class ReminderCard extends Component {
 
   render() {
     const { reminder } = this.props || {};
-    const due = formattedDateTime(reminder.due_date)
+    const dueDate = formattedDate(reminder.due_date)
+    const dueTime = formattedTime(reminder.due_date)
     return (
       <>
         <div className='ReminderCard__container'>
           <h3 className='ReminderCard__title'>{reminder.title}</h3>
-          <h4 className='ReminderCard__due-date'><span>Due:</span> {due}</h4>
+          <h4 className='ReminderCard__due-date'>
+            <span>Due: </span> 
+            {dueDate} <br /> 
+            {dueTime}
+          </h4>
         </div>
       </>
     )
