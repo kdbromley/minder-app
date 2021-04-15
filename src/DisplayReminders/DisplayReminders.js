@@ -106,7 +106,7 @@ export default class DisplayReminders extends Component {
           {remindersToDisplay.map(reminder =>
           <div className='Display__reminder' key={reminder.id}>
             <Link to={`/reminders/${reminder.id}`} >
-                <ReminderCard reminder={reminder} />
+                <ReminderCard reminder={reminder} className='Display'/>
             </Link>
             <div className='Display__buttons-container'>
               {reminder.completed

@@ -54,52 +54,52 @@ export default class ReminderPage extends Component {
       this.props.history.push(`/reminders/${reminderId}`)
   }
   onCheckReminder = (reminder) => {
-      const data = { completed: true }
-      
-      fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => {
-          if (!response.ok) {
-            return response.json().then(e => Promise.reject(e))
-          }
-        })
-        .then(() => {
-          this.context.checkReminder(reminder.id)
-          this.props.history.push('/reminders')
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    const data = { completed: true }
+    
+    fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(e => Promise.reject(e))
+        }
+      })
+      .then(() => {
+        this.context.checkReminder(reminder.id)
+        this.props.history.push('/reminders')
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
   onUncheckReminder = (reminder) => {
-      const data = { completed: "false" }
+    const data = { completed: "false" }
 
-      fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => {
-          if (!response.ok) {
-            return response.json().then(e => Promise.reject(e))
-          }
-        })
-        .then(() => {
-          this.context.uncheckReminder(reminder.id)
-          this.props.history.push('/reminders')
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(e => Promise.reject(e))
+        }
+      })
+      .then(() => {
+        this.context.uncheckReminder(reminder.id)
+        this.props.history.push('/reminders')
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   render() {
@@ -113,24 +113,26 @@ export default class ReminderPage extends Component {
     )
     } else {
       return(
-        <div className='ReminderPage__reminder-container'>
-          <ReminderCard reminder={reminder} />
-          <div className='Reminder__buttons'>
-            {reminder.completed
-             ? <Button className='' label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
-             : <Button className='' label='Check' handleClick={() => this.onCheckReminder(reminder)} /> 
-            }
-            <Button className='' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
-            <Button className='' label='Edit' handleClick={this.onEditReminder} />
+        <div className='ReminderPage__container'>
+          <ReminderCard reminder={reminder} className='ReminderPage'/>
+          <div className='ReminderPage__reminder-notes'>
+            <h6>Notes</h6>
+            <p>{reminder.reminder_notes}</p>
           </div>
-          <h6>Notes</h6>
-          <p>{reminder.reminder_notes}</p>
-          
+
           {this.state.displayEditReminder &&
             <EditReminder submitEdits={this.onEditSubmission} reminder={reminder}                  
             cancelEdit={this.onCancelEdit}
             />
           }
+          <div className='ReminderPage__buttons'>
+            {reminder.completed
+             ? <Button label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
+             : <Button label='Check' handleClick={() => this.onCheckReminder(reminder)} /> 
+            }
+            <Button label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
+            <Button label='Edit' handleClick={this.onEditReminder} />
+          </div>
         </div>
       )
     }

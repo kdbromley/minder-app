@@ -8,6 +8,7 @@ export default class ReminderCard extends Component {
   static contextType = RemindersContext;  
   static defaultProps = {
     reminder: {},
+    className: '',
   }
   
 
@@ -15,9 +16,10 @@ export default class ReminderCard extends Component {
     const { reminder } = this.props || {};
     const dueDate = formattedDate(reminder.due_date)
     const dueTime = formattedTime(reminder.due_date)
+
     return (
       <>
-        <div className='ReminderCard__container'>
+        <div className={`ReminderCard__container ${this.props.className}`}>
           <h3 className='ReminderCard__title'>{reminder.title}</h3>
           <h4 className='ReminderCard__due-date'>
             <span>Due: </span> 
