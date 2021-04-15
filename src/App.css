@@ -6,12 +6,17 @@
 }
 
 footer {
-  margin-top: 50px;
   padding-top: 20px;
+  max-height: 70px;
+  min-height: 60px;
 }
 
-main {
-  min-height: 90vh;
+h2 {
+  font-family: 'Playfair Display', 'Bodoni MT', 'Didot', 'Times', serif ;
+  letter-spacing: 1.5px;
+  font-size: calc(28px + 35 * ((100vw - 320px) / 680));;
+  margin-bottom: 3%;
+  margin-top: 3%;
 }
 
 footer {

@@ -9,8 +9,10 @@ body {
 }
 
 main {
-  padding-right: 5%;
-  padding-left: 5%;
+  min-height: 75vh;
+  padding-top: 10px;
+  padding-right: 10%;
+  padding-left: 10%;
   background-color: #F9FAF5;
 }
 
