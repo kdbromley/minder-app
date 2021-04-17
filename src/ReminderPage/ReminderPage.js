@@ -125,7 +125,7 @@ export default class ReminderPage extends Component {
             cancelEdit={this.onCancelEdit}
             />
           }
-          <div className='ReminderPage__buttons'>
+          <div className='ReminderPage__buttons-container'>
             {reminder.completed
              ? <Button label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
              : <Button label='Check' handleClick={() => this.onCheckReminder(reminder)} /> 

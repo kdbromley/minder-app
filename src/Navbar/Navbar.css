@@ -5,10 +5,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-right: 4%;
-    margin-left: 4%;
-    margin-top: 4%;
-    margin-bottom: 4%;
+    margin: 4%;
     min-height: 60px;
 }
 .Navbar__container :nth-child(1) { order: 2; }
@@ -33,4 +30,10 @@ a.Navbar__link {
 a.Navbar__link:hover, a.Navbar__link:active {
     text-decoration: none;
     font-style: italic;
+}
+
+@media all and (min-width: 700px) {
+    .Navbar__container {
+        margin: 2%;
+    }
 }
