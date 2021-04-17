@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
 import ValidationError from '../ValidationError';
+import Button from '../Button/Button';
 import { convertToISO, hourArray } from '../helper-func';
 import config from '../config';
 import './AddReminder.css';
@@ -108,44 +109,55 @@ export default class AddReminder extends Component {
         {this.state.error && <ValidationError message={this.state.error} /> }
         <form className='AddReminder__form'
          onSubmit={this.handleSubmit}>
-          <label htmlFor='title'>Reminder: </label>
-          <input id='title' type='text' placeholder='Water Plants' required 
+          <label htmlFor='title'>Reminder: 
+           <input id='title' type='text' 
+            placeholder='Water Plants' required 
             onChange={e => this.updateTitle(e.target.value)} />
-            <ValidationError message={this.validateTitle()} />
+          </label>
+
+          <ValidationError message={this.validateTitle()} />
           
           <fieldset>
-            <legend>Due:</legend>
+            <legend aria-label='Due date/time'></legend>
 
-            <label htmlFor='date'>Date: </label>
-            <input id='date' type='text' name='date' 
-             pattern='\d{1,2}/\d{1,2}/\d{4}' placeholder='mm/dd/yyyy' 
-             aria-label='month/day/full year' required
-             onChange={e => this.updateDueDate(e.target.value)}/>
+            <label htmlFor='due-date' className='add-space'>
+              Due Date: 
+              <input id='due-date' type='date' name='date' 
+               aria-label='month/day/full year' required
+               onChange={e => this.updateDueDate(e.target.value)}/>
+            </label>
+            
 
-            <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
-            <select name='hour' id='hour'>
-              {hourArray.map(hour => {
-                  return <option key={hour} name= 'hour' value={`${hour}`}>{hour}</option>}
-              )}
-            </select>
-            <select name='ampm' id='ampm'>
-              <option name='ampm' value='AM'>AM</option>
-              <option name='ampm' value='PM'>PM</option>
-            </select>
+            <label htmlFor='time-due'
+             aria-label='Time due: choose hour (increments of 30 minutes) then AM/PM'>
+              Time Due:
+              <span className='AddReminder__time-inputs'>
+              <select name='hour' id='time-due'>
+                {hourArray.map(hour => {
+                  return <option key={hour} name='hour' value={`${hour}`}>{hour}</option>}
+                )}
+              </select>
+              <select name='am-pm' id='time-due'>
+                <option name='am-pm' value='AM'>AM</option>
+                <option name='am-pm' value='PM'>PM</option>
+              </select>
+             </span>
+            </label>
+
             <ValidationError message={this.validateDueDate()} />
           </fieldset>
 
-          <label htmlFor='notes'>Notes:</label>
-          <input id='notes' type='textarea' rows='4' cols='15' placeholder='Fern gets 2 cups, flowers 1 cup each, spritz water on flowers' /> 
+          <label htmlFor='notes'>
+            Notes:
+           <input id='notes' name='notes'
+           type='textarea' rows={4} cols={20} 
+            placeholder='Fern gets spritz' />
+          </label>
           
           <div className='AddReminder__button-container'>
-            <button type='submit' className='AddReminder__button add'>
-              Create
-            </button>
-            <button type='button' className='AddReminder__button cancel'
-             onClick={this.handleClickCancel}>
-              Cancel
-            </button>
+            <Button type='submit' className='AddReminder__button add' label='Add' />
+            <Button className='AddReminder__button cancel' label='Cancel and Go Back'
+             onClick={this.handleClickCancel} />
           </div>
         </form>
       </div>

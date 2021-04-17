@@ -2,17 +2,9 @@ import { parse, formatISO, parseISO, format } from 'date-fns';
 
 export const convertToISO = (date, time, ampm) => {
     const dateTime = date + ' ' + time + ' ' + ampm;
-    const parsedDateTime = parse(dateTime, 'MM/dd/yyyy h:mm a', new Date())
+    const parsedDateTime = parse(dateTime, 'yyyy-MM-dd h:mm a', new Date())
     const ISODateTime = formatISO(parsedDateTime)
     return ISODateTime
-}
-
-export const convertToReadable = (date) => {
-    const fullDate = parseISO(date)
-    const condensedDate = fullDate.toString().slice(0, 24)
-    //const readableDate = parse(condensedDate, 'E..EEE MMM dd yyyy HH:mm:ss', new Date())
-    //return readableDate; 
-    return condensedDate      //more readable formatting will be completed during styling
 }
 
 export const formattedTime = (date) => format(parseISO(date), 'h:mm bbb')

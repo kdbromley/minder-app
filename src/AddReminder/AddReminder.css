@@ -1,17 +1,86 @@
 .AddReminder__form {
-    margin: 5px;
-    border: .5px solid black;
-    padding: 10px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: calc(22px + 10 * ((100vw - 320px) / 680));
+    color: #275982;
+    margin: 15px;
+}
+
+label {
+    margin-bottom: calc(5px + 12 * ((100vw - 320px) / 680));
+}
+
+label.add-space {
+    margin-bottom: 4%;
+}
+
+input#title {
+    margin-left: 6px;
+    width: calc(148.5px + 100 * ((100vw - 320px) / 680));
+    height: calc(30px + 50 * ((100vw - 320px) / 680));
+    margin-bottom: 8px;
+    font-size: calc(16px + 15 * ((100vw - 320px) / 680));
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+input#due-date {
+    margin-left: 6px;
+    width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+    height: calc(30px + 30 * ((100vw - 320px) / 680));
+    margin-bottom: 8px;
+    font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    display: inline;
+}
+
+.AddReminder__time-inputs {
+    margin-left: 2px;
+    display: inline-block;
+}
+
+select {
+    margin-left: 6px;
+    margin-bottom: 10px;
+    width: calc(86.5px + 50 * ((100vw - 320px) / 680));
+    height: calc(35px + 30 * ((100vw - 320px) / 680));
+    font-size: calc(18px + 10 * ((100vw - 320px) / 680));
+}
+
+select[name='am-pm'] {
+    width: calc(60px + 30 * ((100vw - 320px) / 680));
+}
+
+input#notes {
+    margin-left: 6px;
+    width: calc(203px + 100 * ((100vw - 320px) / 680));
+    height: 75px;
+    text-align: left;
+    font-size: calc(16px + 10 * ((100vw - 320px) / 680));
 }
 
 .AddReminder__button-container {
+    align-self: center;
+    width: calc(100px + 150 * ((100vw - 320px) / 680));
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .AddReminder__button {
-    margin: auto;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .error {
