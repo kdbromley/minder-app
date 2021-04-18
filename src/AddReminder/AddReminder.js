@@ -27,8 +27,8 @@ export default class AddReminder extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
-    const { title, date, hour, ampm,  notes } = e.target
-    const dueDate = convertToISO(date.value, hour.value, ampm.value)
+    const { title, due_date, hour, ampm,  notes } = e.target
+    const dueDate = convertToISO(due_date.value, hour.value, ampm.value)
     const newReminder = {
       'title': title.value,
       'due_date': dueDate,
@@ -79,6 +79,7 @@ export default class AddReminder extends Component {
     });
   }
   updateDueDate(date) {
+    console.log(date)
     this.setState({
       date: {
         value: date,
@@ -93,13 +94,6 @@ export default class AddReminder extends Component {
     if (touched === true && title.length === 0) {
         return 'Title is required'
       } 
-  }
-  validateDueDate() {
-    const date = this.state.date.value.trim();
-    const touched = this.state.date.touched;
-    if (touched === true && date.length === 0) {
-        return 'Due date is required'
-    } 
   }
   
 
@@ -120,38 +114,35 @@ export default class AddReminder extends Component {
           <fieldset>
             <legend aria-label='Due date/time'></legend>
 
-            <label htmlFor='due-date' className='add-space'>
+            <label htmlFor='due_date' className='add-space'>
               Due Date: 
-              <input id='due-date' type='date' name='date' 
-               aria-label='month/day/full year' required
-               onChange={e => this.updateDueDate(e.target.value)}/>
+              <input id='due_date' type='date' name='date' required />
             </label>
             
 
-            <label htmlFor='time-due'
-             aria-label='Time due: choose hour (increments of 30 minutes) then AM/PM'>
+            <label htmlFor='time-due'>
               Time Due:
               <span className='AddReminder__time-inputs'>
-              <select name='hour' id='time-due'>
+              <select name='hour' id='hour' aria-label='select hour'>
                 {hourArray.map(hour => {
                   return <option key={hour} name='hour' value={`${hour}`}>{hour}</option>}
                 )}
               </select>
-              <select name='am-pm' id='time-due'>
-                <option name='am-pm' value='AM'>AM</option>
-                <option name='am-pm' value='PM'>PM</option>
+              <select name='ampm' id='ampm' aria-label='select am or pm'>
+                <option name='am' value='AM'>A.M.</option>
+                <option name='pm' value='PM'>P.M.</option>
               </select>
              </span>
             </label>
 
-            <ValidationError message={this.validateDueDate()} />
+            <ValidationError message={this.state.error} />
           </fieldset>
 
           <label htmlFor='notes'>
             Notes:
            <input id='notes' name='notes'
-           type='textarea' rows={4} cols={20} 
-            placeholder='Fern gets spritz' />
+           type='textarea' rows='4' cols={20}
+           wrap='soft' />
           </label>
           
           <div className='AddReminder__button-container'>

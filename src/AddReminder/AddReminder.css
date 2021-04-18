@@ -33,7 +33,7 @@ fieldset {
     margin: 0;
 }
 
-input#due-date {
+input#due_date {
     margin-left: 6px;
     width: calc(159.5px + 80 * ((100vw - 320px) / 680));
     height: calc(30px + 30 * ((100vw - 320px) / 680));
@@ -55,14 +55,15 @@ select {
     font-size: calc(18px + 10 * ((100vw - 320px) / 680));
 }
 
-select[name='am-pm'] {
+select#ampm {
     width: calc(60px + 30 * ((100vw - 320px) / 680));
 }
 
 input#notes {
     margin-left: 6px;
     width: calc(203px + 100 * ((100vw - 320px) / 680));
-    height: 75px;
+    height: 35px;
+    word-wrap: break-word;
     text-align: left;
     font-size: calc(16px + 10 * ((100vw - 320px) / 680));
 }
@@ -85,4 +86,44 @@ input#notes {
 
 .error {
     color: brown;
+}
+
+@media all and (min-width: 600px) {
+    input#title {
+        width: calc(148.5px + 100 * ((100vw - 320px) / 680));
+        height: calc(30px + 10 * ((100vw - 320px) / 680));
+        font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    }
+    
+    input#due_date {
+        margin-left: 6px;
+        width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+        height: calc(30px + 30 * ((100vw - 320px) / 680));
+        font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    }
+
+    .AddReminder__time-inputs {
+        margin-left: 2px;
+        display: inline-block;
+        width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+        height: calc(30px + 30 * ((100vw - 320px) / 680));
+    }
+    
+    select {
+        width: calc(65.5px + 50 * ((100vw - 320px) / 680));
+        height: calc(25px + 30 * ((100vw - 320px) / 680));
+        font-size: calc(10px + 10 * ((100vw - 320px) / 680));
+    }
+    
+    select#ampm {
+        width: calc(60px + 30 * ((100vw - 320px) / 680));
+    }
+
+    input#notes {
+        margin-left: 6px;
+        width: calc(200px + 50 * ((100vw - 320px) / 680));
+        height: 45px;
+        text-align: left;
+        font-size: calc(12px + 10 * ((100vw - 320px) / 680));
+    }
 }
