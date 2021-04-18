@@ -38,7 +38,7 @@ class App extends React.Component {
         this.loadReminders(reminders)
       })
       .catch(err => {
-        console.log({err})
+        console.error({err})
       })
     );
 
@@ -145,7 +145,11 @@ class App extends React.Component {
           </main>
        </RemindersContext.Provider>
         <footer>
-          Footer
+          <p>
+          © k.d. Bromley 2021  ||  See the <a href='https://github.com/kdbromley/minder-app' target='_blank'>Github Repo</a>! <br /> 
+          Button icons from <a href='https://feathericons.com/' target='_blank'>Feather</a> icon collection.
+          
+          </p>
         </footer>
       </div>
     );
