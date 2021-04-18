@@ -1,8 +1,10 @@
 import React from 'react';
 //import { useState } from 'react';
+import Button from '../Button/Button';
 import PropTypes from 'prop-types';
-import { convertToISO, formattedDate, hourArray } from '../helper-func';
+import { convertToISO, formatAMPMForForm, formatDateForForm, formatDateForInput, formatTimeForForm, hourArray } from '../helper-func';
 import config from '../config';
+import './EditReminder.css';
 
 export default function EditReminder(props) {   
   //const [error] = useState('')     //form input errors for user information, will add feature in styling
@@ -50,44 +52,53 @@ export default function EditReminder(props) {
       props.cancelEdit()
   }
   
-  const date = formattedDate(reminder.due_date)
+  const date = formatDateForForm(reminder.due_date)
+  const hour = formatTimeForForm(reminder.due_date)
+  const ampm = formatAMPMForForm(reminder.due_date)
 
   return (
     <form className='EditReminder__form'
-      onSubmit={handleSubmit}>
-      <label htmlFor='title'>Reminder: </label>
-        <input id='title' type='text' defaultValue={reminder.title} placeholder={reminder.title}/>
-      <fieldset>
-        <legend>Due:</legend>
-        <label htmlFor='date'>Date: </label>
-          <input id='date' type='text' name='date' pattern='\d{1,2}/\d{1,2}/\d{4}' 
-            defaultValue={date} placeholder={date}
-            aria-label='month/day/full year'
-          />
-        
-        <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
-          <select name='hour' id='hour'>
+     onSubmit={handleSubmit} >
+      <label htmlFor='title'>Reminder:
+        <input id='title' type='text' 
+        defaultValue={reminder.title} placeholder={reminder.title}/>
+      </label>
+      <fieldset aria-label='due date and time'>
+        <label htmlFor='due_date'>Date:
+          <input id='due_date' type='date' name='date'
+            defaultValue={date} />
+        </label>
+
+        <label htmlFor='time-due'>
+          Time Due:
+          <span className='EditReminder__time-inputs'>
+          <select name='hour' id='hour' 
+          aria-label='select hour' defaultValue={`${hour}`}>
             {hourArray.map(hour => {
-              return <option key={hour} name= 'hour' value={`${hour}`}>{hour}</option>}
+              return <option key={hour} name='hour' value={`${hour}`}>{hour}</option>}
             )}
           </select>
-          <select name='ampm' id='ampm'>
-            <option name='ampm' value='AM'>AM</option>
-            <option name='ampm' value='PM'>PM</option>
+          <select name='ampm' id='ampm' defaultValue={`${ampm}`}
+          aria-label='select a.m. or p.m.'>
+            <option name='am' value='AM'>A.M.</option>
+            <option name='pm' value='PM'>P.M.</option>
           </select>
+          </span>
+        </label>
       </fieldset>
-      <label htmlFor='notes'>Notes:</label>
+
+      <label htmlFor='notes'>
+        Notes:
         <input id='notes' type='textarea' rows='4' cols='15' 
-          defaultValue={reminder.reminder_notes} placeholder={reminder.reminder_notes} 
-        /> 
-      <div className='AddReminder__button-container'>
-        <button type='submit' className='AddReminder__button'>
-          Submit
-        </button>
-        <button type='button' className='AddReminder__button'
-          onClick={handleClickCancel}>
-            Cancel
-        </button>
+          defaultValue={reminder.reminder_notes} 
+          placeholder={reminder.reminder_notes} /> 
+      </label>
+      <div className='EditReminder__button-container'>
+        <Button type='submit' className='EditReminder__button submit' 
+        label='Confirm Edit' />
+        <Button className='EditReminder__button cancel' 
+        label='Cancel and Go Back'
+         onClick={handleClickCancel} />
       </div>
     </form>
   )

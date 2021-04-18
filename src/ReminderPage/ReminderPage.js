@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import EditReminder from "../EditReminder/EditReminder";
 import ReminderCard from '../ReminderCard/ReminderCard';
 import RemindersContext from "../RemindersContext";
@@ -125,6 +125,7 @@ export default class ReminderPage extends Component {
             cancelEdit={this.onCancelEdit}
             />
           }
+          {this.state.displayEditReminder === false &&
           <div className='ReminderPage__buttons-container'>
             {reminder.completed
              ? <Button label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
@@ -133,6 +134,7 @@ export default class ReminderPage extends Component {
             <Button label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
             <Button label='Edit' handleClick={this.onEditReminder} />
           </div>
+          }
         </div>
       )
     }

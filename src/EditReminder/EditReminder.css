@@ -1,0 +1,131 @@
+.EditReminder__form {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: calc(22px + 10 * ((100vw - 320px) / 680));
+    color: #275982;
+    margin: 15px;
+    padding-top: 20px;
+    border-top: 0.5px #7e193b solid;
+}
+
+label {
+    margin-bottom: calc(5px + 12 * ((100vw - 320px) / 680));
+}
+
+label.add-space {
+    margin-bottom: 4%;
+}
+
+input#title {
+    margin-left: 6px;
+    width: calc(148.5px + 100 * ((100vw - 320px) / 680));
+    height: calc(30px + 50 * ((100vw - 320px) / 680));
+    margin-bottom: 8px;
+    font-size: calc(16px + 15 * ((100vw - 320px) / 680));
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+input#due_date {
+    margin-left: 6px;
+    width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+    height: calc(30px + 30 * ((100vw - 320px) / 680));
+    margin-bottom: 8px;
+    font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    display: inline;
+}
+
+.EditReminder__time-inputs {
+    margin-left: 2px;
+    display: inline-block;
+}
+
+select {
+    margin-left: 6px;
+    margin-bottom: 10px;
+    width: calc(86.5px + 50 * ((100vw - 320px) / 680));
+    height: calc(35px + 30 * ((100vw - 320px) / 680));
+    font-size: calc(18px + 10 * ((100vw - 320px) / 680));
+}
+
+select#ampm {
+    width: calc(60px + 30 * ((100vw - 320px) / 680));
+}
+
+input#notes {
+    margin-left: 6px;
+    width: calc(203px + 100 * ((100vw - 320px) / 680));
+    height: 35px;
+    word-wrap: break-word;
+    text-align: left;
+    font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+}
+
+.EditReminder__button-container {
+    align-self: center;
+    width: calc(100px + 150 * ((100vw - 320px) / 680));
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.EditReminder__button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.error {
+    color: brown;
+}
+
+@media all and (min-width: 600px) {
+    input#title {
+        width: calc(148.5px + 100 * ((100vw - 320px) / 680));
+        height: calc(30px + 10 * ((100vw - 320px) / 680));
+        font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    }
+    
+    input#due_date {
+        margin-left: 6px;
+        width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+        height: calc(30px + 30 * ((100vw - 320px) / 680));
+        font-size: calc(16px + 10 * ((100vw - 320px) / 680));
+    }
+
+    .EditReminder__time-inputs {
+        margin-left: 2px;
+        display: inline-block;
+        width: calc(159.5px + 80 * ((100vw - 320px) / 680));
+        height: calc(30px + 30 * ((100vw - 320px) / 680));
+    }
+    
+    select {
+        width: calc(65.5px + 50 * ((100vw - 320px) / 680));
+        height: calc(25px + 30 * ((100vw - 320px) / 680));
+        font-size: calc(10px + 10 * ((100vw - 320px) / 680));
+    }
+    
+    select#ampm {
+        width: calc(60px + 30 * ((100vw - 320px) / 680));
+    }
+
+    input#notes {
+        margin-left: 6px;
+        width: calc(200px + 50 * ((100vw - 320px) / 680));
+        height: 45px;
+        text-align: left;
+        font-size: calc(12px + 10 * ((100vw - 320px) / 680));
+    }
+}

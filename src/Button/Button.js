@@ -4,6 +4,7 @@ import checkIcon from '../images/check.svg';
 import editIcon from '../images/edit.svg';
 import addIcon from '../images/plus-circle.svg';
 import cancelIcon from '../images/x-circle.svg';
+import confirmEditIcon from '../images/edit-3.svg'
 import './Button.css';
 
 export default function Button(props) {
@@ -15,6 +16,7 @@ export default function Button(props) {
       case 'Uncheck': return <img src={checkIcon} alt='Uncheck Reminder Icon' />;
       case 'Edit': return <img src={editIcon} alt='Edit Reminder Icon' />;
       case 'Add': return <img src={addIcon} alt='Add Reminder Icon' />;
+      case 'Confirm Edit': return <img src={confirmEditIcon} alt='Confirm Edit Icon' />;
       case 'Cancel and Go Back': return <img src={cancelIcon} alt='Cancel Icon' />;
       default: return `${props.label}`;
     }
