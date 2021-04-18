@@ -8,7 +8,6 @@ import confirmEditIcon from '../images/edit-3.svg'
 import './Button.css';
 
 export default function Button(props) {
-   //this function will identify what icon to render
   let renderIcon = () => { 
    switch(props.label) {
       case 'Delete': return <img src={deleteIcon} alt='Delete Reminder Icon' />;
@@ -25,7 +24,8 @@ export default function Button(props) {
   let type = props.type || 'button'
 
   return (
-    <button type={type} className="Reminder__button" aria-label={`${props.label}`} onClick={props.handleClick}>
+    <button type={type} className="Reminder__button" 
+    aria-label={`${props.label}`} onClick={props.handleClick}>
       {renderIcon()}
     </button>
   );

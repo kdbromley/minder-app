@@ -78,15 +78,6 @@ export default class AddReminder extends Component {
       }
     });
   }
-  updateDueDate(date) {
-    console.log(date)
-    this.setState({
-      date: {
-        value: date,
-        touched: true
-      }
-    });
-  }
 
   validateTitle() {
     const title = this.state.title.value.trim();
@@ -111,14 +102,11 @@ export default class AddReminder extends Component {
 
           <ValidationError message={this.validateTitle()} />
           
-          <fieldset>
-            <legend aria-label='Due date/time'></legend>
-
+          <fieldset aria-label='due date and time'>
             <label htmlFor='due_date' className='add-space'>
               Due Date: 
               <input id='due_date' type='date' name='date' required />
             </label>
-            
 
             <label htmlFor='time-due'>
               Time Due:
@@ -128,7 +116,7 @@ export default class AddReminder extends Component {
                   return <option key={hour} name='hour' value={`${hour}`}>{hour}</option>}
                 )}
               </select>
-              <select name='ampm' id='ampm' aria-label='select am or pm'>
+              <select name='ampm' id='ampm' aria-label='select a.m. or p.m.'>
                 <option name='am' value='AM'>A.M.</option>
                 <option name='pm' value='PM'>P.M.</option>
               </select>
@@ -141,14 +129,13 @@ export default class AddReminder extends Component {
           <label htmlFor='notes'>
             Notes:
            <input id='notes' name='notes'
-           type='textarea' rows='4' cols={20}
-           wrap='soft' />
+           type='textarea' rows='4' />
           </label>
           
           <div className='AddReminder__button-container'>
             <Button type='submit' className='AddReminder__button add' label='Add' />
             <Button className='AddReminder__button cancel' label='Cancel and Go Back'
-             onClick={this.handleClickCancel} />
+             handleClick={this.handleClickCancel} />
           </div>
         </form>
       </div>
