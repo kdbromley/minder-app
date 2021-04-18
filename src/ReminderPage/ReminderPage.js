@@ -119,12 +119,15 @@ export default class ReminderPage extends Component {
             <h6>Notes</h6>
             <p>{reminder.reminder_notes}</p>
           </div>
-
+          
+          <span aria-live='polite'>
           {this.state.displayEditReminder &&
             <EditReminder submitEdits={this.onEditConfirmed} reminder={reminder}                  
             cancelEdit={this.onCancelEdit}
             />
           }
+          </span>
+
           {this.state.displayEditReminder === false &&
           <div className='ReminderPage__buttons-container'>
             {reminder.completed

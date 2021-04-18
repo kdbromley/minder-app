@@ -22,6 +22,7 @@
 
 .ReminderPage__buttons-container {
     margin-top: 25%;
+    margin-bottom: 5%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -73,7 +74,8 @@
 
     .ReminderPage__buttons-container {
         margin: auto;
-        margin-top: 10%;
+        margin-top: 5%;
+        margin-bottom: 6%;
         width: 60%;
     }
 
