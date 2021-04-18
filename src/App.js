@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import DisplayReminders from './DisplayReminders/DisplayReminders';
-import Sidebar from './Sidebar/Sidebar';
+import Navbar from './Navbar/Navbar';
 import ReminderPage from './ReminderPage/ReminderPage';
 import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
@@ -38,7 +38,7 @@ class App extends React.Component {
         this.loadReminders(reminders)
       })
       .catch(err => {
-        console.log({err})
+        console.error({err})
       })
     );
 
@@ -95,10 +95,6 @@ class App extends React.Component {
     return (
       <>
       <Route
-       path='/'
-       component={Sidebar}
-      />
-      <Route
        exact
        path='/'
        render={(props) => 
@@ -139,9 +135,7 @@ class App extends React.Component {
       <div className="App">
        <RemindersContext.Provider value={contextValue}>
           <header className="App__header">
-            <h1>
-              <Link to='/'>'minder</Link>
-            </h1>
+            <Navbar />
           </header>
           <main className='App__main'>
             <ErrorBoundary>
@@ -151,7 +145,11 @@ class App extends React.Component {
           </main>
        </RemindersContext.Provider>
         <footer>
-          Footer
+          <p>
+          © k.d. Bromley 2021  ||  See the <a href='https://github.com/kdbromley/minder-app' target='_blank'>Github Repo</a>! <br /> 
+          Button icons from <a href='https://feathericons.com/' target='_blank'>Feather</a> icon collection.
+          
+          </p>
         </footer>
       </div>
     );

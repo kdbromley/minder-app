@@ -1,34 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
 .App {
   text-align: center;
-  margin: 5%;
+}
+
+
+h2 {
+  font-family: 'Playfair Display', 'Bodoni MT', 'Didot', 'Times', serif ;
+  letter-spacing: 1.5px;
+  font-size: calc(28px + 35 * ((100vw - 320px) / 680));;
+  margin-bottom: 3%;
+  margin-top: 3%;
 }
 
 footer {
-  margin-top: 50px;
-  border-top: 1px solid black;
-  padding-top: 20px;
+  padding-top: 8%;
+  padding-bottom: 8%;
+  max-height: 100px;
+  min-height: 60px;
+  font-family: 'Playfair Display', 'Times', serif;
+  color: #f5ce4e;
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+footer > a:link, a:visited, a:hover, a:active {
+  color: #f5ce4e;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media all and (min-width: 500px) {
+  footer {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-size: 20px;
   }
 }

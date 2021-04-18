@@ -1,3 +1,42 @@
-.LandingPage__link {
-    margin-top: 15px;
+.LandingPage__container {
+    min-height: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5%;
+}
+
+.LandingPage__wrapper {
+    background-image: url(../images/wavy-rectangle.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 5px;
+    margin: 5px;
+    height: calc(150px + 200 * ((100vw - 320px) / 680));
+    width: calc(200px + 200 * ((100vw - 320px) / 680));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LandingPage__notif {
+    margin-bottom: 10px;
+    padding: 2px;
+    font-size: calc(18px + 22 * ((100vw - 320px) / 680));
+}
+
+a.LandingPage__all-link {
+    margin-top: 5px;
+    font-size: calc(22px + 12 * ((100vw - 320px) / 680));
+    color: #275982;
+}
+a.LandingPage__all-link:hover, a.LandingPage__link:active {
+    font-style: italic;
+}
+
+.unicode__check {
+    font-size: calc(35px + 15 * ((100vw - 320px) / 680));
 }

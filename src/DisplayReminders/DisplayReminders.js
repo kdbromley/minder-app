@@ -106,14 +106,14 @@ export default class DisplayReminders extends Component {
           {remindersToDisplay.map(reminder =>
           <div className='Display__reminder' key={reminder.id}>
             <Link to={`/reminders/${reminder.id}`} >
-                <ReminderCard reminder={reminder} />
+                <ReminderCard reminder={reminder} className='Display'/>
             </Link>
-            <div className='Display__buttons'>
+            <div className='Display__buttons-container'>
               {reminder.completed
-              ? <Button className='Display__button uncheck' label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
+              ? <Button className='__button uncheck' label='Uncheck' handleClick={() => this.onUncheckReminder(reminder)} />
               : <Button className='Display__button check' label='Check' handleClick={() => this.onCheckReminder(reminder)} /> 
               }
-              <Button className='Display__button delete' label='Delete' handleClick={() => this.onDeleteReminder(reminder)} reminder={reminder}/>
+              <Button label='Delete' handleClick={() => this.onDeleteReminder(reminder)} reminder={reminder}/>
             </div>
           </div>
           )}

@@ -1,6 +1,27 @@
 .ReminderCard__container {
-    border: 0.4px solid black;
-    border-radius: 30px;
-    background-color: lightblue;
-    margin-top: 10px;
+    border-radius: 10px;
+    padding: 2px;
+    background-color: #f5ce4e;
+    text-decoration: none;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ReminderCard__title, .ReminderCard__due-date {
+    color: #16262e;
+    margin: 5px;
+    font-size: calc(16px + 20 * ((100vw - 320px) / 680));
+}
+
+span {
+    color: #275982;
+}
+
+@media all and (min-width: 800px) {
+    .ReminderCard__title, .ReminderCard__due-date {
+        font-size: calc(32px + 0 * ((100vw - 800px) / 680));
+    }
 }

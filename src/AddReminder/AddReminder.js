@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import RemindersContext from '../RemindersContext';
 import ValidationError from '../ValidationError';
+import Button from '../Button/Button';
 import { convertToISO, hourArray } from '../helper-func';
 import config from '../config';
 import './AddReminder.css';
@@ -26,8 +27,8 @@ export default class AddReminder extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
-    const { title, date, hour, ampm,  notes } = e.target
-    const dueDate = convertToISO(date.value, hour.value, ampm.value)
+    const { title, due_date, hour, ampm,  notes } = e.target
+    const dueDate = convertToISO(due_date.value, hour.value, ampm.value)
     const newReminder = {
       'title': title.value,
       'due_date': dueDate,
@@ -77,14 +78,6 @@ export default class AddReminder extends Component {
       }
     });
   }
-  updateDueDate(date) {
-    this.setState({
-      date: {
-        value: date,
-        touched: true
-      }
-    });
-  }
 
   validateTitle() {
     const title = this.state.title.value.trim();
@@ -92,13 +85,6 @@ export default class AddReminder extends Component {
     if (touched === true && title.length === 0) {
         return 'Title is required'
       } 
-  }
-  validateDueDate() {
-    const date = this.state.date.value.trim();
-    const touched = this.state.date.touched;
-    if (touched === true && date.length === 0) {
-        return 'Due date is required'
-    } 
   }
   
 
@@ -108,44 +94,48 @@ export default class AddReminder extends Component {
         {this.state.error && <ValidationError message={this.state.error} /> }
         <form className='AddReminder__form'
          onSubmit={this.handleSubmit}>
-          <label htmlFor='title'>Reminder: </label>
-          <input id='title' type='text' placeholder='Water Plants' required 
+          <label htmlFor='title'>Reminder: 
+           <input id='title' type='text' 
+            placeholder='Water Plants' required 
             onChange={e => this.updateTitle(e.target.value)} />
-            <ValidationError message={this.validateTitle()} />
+          </label>
+
+          <ValidationError message={this.validateTitle()} />
           
-          <fieldset>
-            <legend>Due:</legend>
+          <fieldset aria-label='due date and time'>
+            <label htmlFor='due_date' className='add-space'>
+              Due Date: 
+              <input id='due_date' type='date' name='date' required />
+            </label>
 
-            <label htmlFor='date'>Date: </label>
-            <input id='date' type='text' name='date' 
-             pattern='\d{1,2}/\d{1,2}/\d{4}' placeholder='mm/dd/yyyy' 
-             aria-label='month/day/full year' required
-             onChange={e => this.updateDueDate(e.target.value)}/>
+            <label htmlFor='time-due'>
+              Time Due:
+              <span className='AddReminder__time-inputs'>
+              <select name='hour' id='hour' aria-label='select hour'>
+                {hourArray.map(hour => {
+                  return <option key={hour} name='hour' value={`${hour}`}>{hour}</option>}
+                )}
+              </select>
+              <select name='ampm' id='ampm' aria-label='select a.m. or p.m.'>
+                <option name='am' value='AM'>A.M.</option>
+                <option name='pm' value='PM'>P.M.</option>
+              </select>
+             </span>
+            </label>
 
-            <label htmlFor='time' aria-label='choose hour then AM/PM'>Time:</label>
-            <select name='hour' id='hour'>
-              {hourArray.map(hour => {
-                  return <option key={hour} name= 'hour' value={`${hour}`}>{hour}</option>}
-              )}
-            </select>
-            <select name='ampm' id='ampm'>
-              <option name='ampm' value='AM'>AM</option>
-              <option name='ampm' value='PM'>PM</option>
-            </select>
-            <ValidationError message={this.validateDueDate()} />
+            <ValidationError message={this.state.error} />
           </fieldset>
 
-          <label htmlFor='notes'>Notes:</label>
-          <input id='notes' type='textarea' rows='4' cols='15' placeholder='Fern gets 2 cups, flowers 1 cup each, spritz water on flowers' /> 
+          <label htmlFor='notes'>
+            Notes:
+           <input id='notes' name='notes'
+           type='textarea' rows='4' />
+          </label>
           
           <div className='AddReminder__button-container'>
-            <button type='submit' className='AddReminder__button add'>
-              Create
-            </button>
-            <button type='button' className='AddReminder__button cancel'
-             onClick={this.handleClickCancel}>
-              Cancel
-            </button>
+            <Button type='submit' className='AddReminder__button add' label='Add' />
+            <Button className='AddReminder__button cancel' label='Cancel and Go Back'
+             handleClick={this.handleClickCancel} />
           </div>
         </form>
       </div>
