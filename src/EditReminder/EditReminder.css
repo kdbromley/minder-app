@@ -91,6 +91,11 @@ input#notes {
 }
 
 @media all and (min-width: 600px) {
+    .EditReminder__form {
+        padding-top: 40px;
+        margin-top: 35px;
+    }
+    
     input#title {
         width: calc(148.5px + 100 * ((100vw - 320px) / 680));
         height: calc(30px + 10 * ((100vw - 320px) / 680));
