@@ -42,13 +42,13 @@ export default class ReminderPage extends Component {
       console.error(err)
     })
   }
-  onEditReminder = () => {
+  handleEditButtonClick = () => {
       this.setState({ displayEditReminder: true })
   }
   onCancelEdit = () => {
       this.setState({ displayEditReminder: false })
   }
-  onEditSubmission = (reminderId, updatedReminder) => {
+  onEditConfirmed = (reminderId, updatedReminder) => {
       this.context.editReminder(reminderId, updatedReminder)
       this.setState({ displayEditReminder: false })
       this.props.history.push(`/reminders/${reminderId}`)
@@ -121,7 +121,7 @@ export default class ReminderPage extends Component {
           </div>
 
           {this.state.displayEditReminder &&
-            <EditReminder submitEdits={this.onEditSubmission} reminder={reminder}                  
+            <EditReminder submitEdits={this.onEditConfirmed} reminder={reminder}                  
             cancelEdit={this.onCancelEdit}
             />
           }
@@ -132,7 +132,7 @@ export default class ReminderPage extends Component {
              : <Button label='Check' handleClick={() => this.onCheckReminder(reminder)} /> 
             }
             <Button label='Delete' handleClick={() => this.onDeleteReminder(reminder)} />
-            <Button label='Edit' handleClick={this.onEditReminder} />
+            <Button label='Edit' handleClick={this.handleEditButtonClick} />
           </div>
           }
         </div>
