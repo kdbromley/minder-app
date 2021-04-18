@@ -146,9 +146,8 @@ class App extends React.Component {
        </RemindersContext.Provider>
         <footer>
           <p>
-          © k.d. Bromley 2021  ||  See the <a href='https://github.com/kdbromley/minder-app' target='_blank'>Github Repo</a>! <br /> 
-          Button icons from <a href='https://feathericons.com/' target='_blank'>Feather</a> icon collection.
-          
+          © k.d. Bromley 2021  ||  See the <a href='https://github.com/kdbromley/minder-app' className='footer__link' target='_blank'>Github Repo</a>! <br /> 
+          Button icons from <a href='https://feathericons.com/' rel='norefferer' className='footer__link' target='_blank'>Feather</a> icon collection.
           </p>
         </footer>
       </div>

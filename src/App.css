@@ -25,7 +25,7 @@ footer {
   letter-spacing: 1px;
 }
 
-footer > a:link, a:visited, a:hover, a:active {
+a.footer__link:link, a.footer__link:visited, a.footer__link:hover, a.footer__link:active {
   color: #f5ce4e;
 }
 
