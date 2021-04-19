@@ -42,7 +42,8 @@ This front end application was made using
 * HTML
 * CSS (vanilla)
 
-The backend (https://github.com/kdbromley/minder-app-api) consists of an Express server and Heroku PostgreSQL database. Documentation can be found in the repo's README.
+The backend (https://github.com/kdbromley/minder-app-api) consists of an Express server and Heroku PostgreSQL database.
+
 
 
 
