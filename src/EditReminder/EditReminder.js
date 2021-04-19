@@ -19,6 +19,11 @@ export default function EditReminder(props) {
     e.preventDefault();
     setIsTouched(false);
     const { title, due_date, hour, ampm, notes } = e.target;
+    if(!title.value || !due_date.value) {
+      const message = 'Title and due date are required';
+      setError(message);
+      return;
+    } 
     const dueDate = convertToISO(due_date.value, hour.value, ampm.value)
     const updatedReminder = {
       'id': reminder.id,
@@ -27,11 +32,6 @@ export default function EditReminder(props) {
       'reminder_notes': notes.value,
       'completed': false,             
       //no user_id field for editing
-    } 
-    if(!updatedReminder.title || !updatedReminder.due_date) {
-      const message = 'Title and due date are required';
-      setError(message);
-      return;
     } 
 
     fetch(config.API_BASE_URL + config.REMINDERS_ENDPOINT + `/${reminder.id}`, {
