@@ -28,13 +28,16 @@
     font-size: calc(18px + 22 * ((100vw - 320px) / 680));
 }
 
-a.LandingPage__all-link {
+a.blue-string {
     margin-top: 5px;
     font-size: calc(22px + 12 * ((100vw - 320px) / 680));
     color: #275982;
 }
-a.LandingPage__all-link:hover, a.LandingPage__link:active {
+a.LandingPage__link:hover, a.LandingPage__link:active {
     font-style: italic;
+}
+a.reminder-card {
+    text-decoration: none;
 }
 
 .unicode__check {

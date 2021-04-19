@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { trackPromise } from 'react-promise-tracker';
+import { format, parseISO } from 'date-fns'; 
+import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import DisplayReminders from './DisplayReminders/DisplayReminders';
 import Navbar from './Navbar/Navbar';
 import ReminderPage from './ReminderPage/ReminderPage';
 import AddReminder from './AddReminder/AddReminder';
 import LandingPage from './LandingPage/LandingPage';
 import RemindersContext from './RemindersContext';
-import { API_BASE_URL, REMINDERS_ENDPOINT } from './config';
 import ErrorBoundary from './ErrorBoundary';
-import { trackPromise } from 'react-promise-tracker';
 import LoadingSpinner from './LoadingSpinner';
 import './App.css';
 
@@ -16,15 +17,9 @@ class App extends React.Component {
   state = {
     reminders: [],
     currentDate: '',
+    todaysReminders: [],
   }
-
-  loadReminders = reminders => {
-    this.setState({ reminders: reminders })
-  }
-  getTodayDate = today => {
-    this.setState({ currentDate: today })
-  }
-
+  
   componentDidMount() {
     trackPromise(
       fetch(API_BASE_URL + REMINDERS_ENDPOINT)
@@ -35,15 +30,24 @@ class App extends React.Component {
         return res.json()
       })
       .then(reminders => {
-        this.loadReminders(reminders)
+        this.setState({ reminders: reminders })
+      })
+      .then(() => {
+        let date = new Date()
+        let today = format(date, 'MM/dd/yyyy')
+        this.setState({ currentDate: today })
+        this.getTodaysReminders()
       })
       .catch(err => {
         console.error({err})
       })
     );
+  }
 
-    let today = new Date().toISOString();
-    this.getTodayDate(today)
+  getTodaysReminders = () => {
+    let todaysReminders = this.state.reminders.filter(reminder => (format(parseISO(reminder.due_date), 'MM/dd/yyyy')) === this.state.currentDate)
+    this.setState({ todaysReminders: todaysReminders })
+    
   }
 
   handleAddReminder = reminder => {
@@ -91,14 +95,13 @@ class App extends React.Component {
   }
   
   renderRoutes() {
-    const todaysReminders = this.state.reminders.filter(reminder => reminder.dueDate === this.state.currentDate)
     return (
       <>
       <Route
        exact
        path='/'
        render={(props) => 
-         <LandingPage {...props} reminders={todaysReminders} />
+         <LandingPage {...props} reminders={this.state.todaysReminders} />
        }
       />
       <Route
@@ -124,7 +127,6 @@ class App extends React.Component {
   render() {
     const contextValue = {
       reminders: this.state.reminders,
-      currentDate: this.state.currentDate,
       addReminder: this.handleAddReminder,
       deleteReminder: this.handleDeleteReminder,
       editReminder: this.handleEditReminder,
